@@ -118,8 +118,8 @@ Este test confirma que el cálculo de la tasa metabólica basal para un hombre s
 ```
 
 <p align="center">
-  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/48041dd4-c19f-44a3-a542-20d395949866" height="300" title="XML Tests">
-  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/e5307c5f-fa0c-4e99-b683-61c5183236c5" height="300" title="tests1">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/48041dd4-c19f-44a3-a542-20d395949866" height="250" title="XML Tests">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/e5307c5f-fa0c-4e99-b683-61c5183236c5" height="250" title="tests1">
 </p>
 
 
