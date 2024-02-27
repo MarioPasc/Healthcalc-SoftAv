@@ -12,7 +12,7 @@ public class HealthCalcTest {
 	private final HealthCalcImpl healthCalc = new HealthCalcImpl();
 	
 	// Tests para el método "idealWeight" de la clase HealthCalcImpl
-		
+
 	// Tests para valores de entrada negativos o igual a cero
 
 	@Test
@@ -51,6 +51,26 @@ public class HealthCalcTest {
 		"El género debe ser 'm' (hombre) o 'w' (mujer).");
 	}
 
+	// TESTS CAJA BLANCA - Funcionamiento esperado interno
+	@Test
+    @DisplayName("Test peso ideal hombre usando fórmula")
+    public void testPesoIdealHombreConFormula() throws Exception {
+        int altura = 180;
+        char genero = 'm';
+        float pesoIdealEsperado = altura - 100 - (altura - 150) / 4f;
+        assertEquals(pesoIdealEsperado, healthCalc.idealWeight(altura, genero), 
+		"El cálculo del peso ideal para hombre no es correcto.");
+    }
+
+    @Test
+    @DisplayName("Test peso ideal mujer usando fórmula")
+    public void testPesoIdealMujerConFormula() throws Exception {
+        int altura = 180;
+        char genero = 'w';
+        float pesoIdealEsperado = altura - 100 - (altura - 150) / 2.5f;
+        assertEquals(pesoIdealEsperado, healthCalc.idealWeight(altura, genero), 
+		"El cálculo del peso ideal para mujer no es correcto.");
+    }
 	// Tests para el método "basalMetabolicRate" de la clase HealthCalcImpl
 
 	// Tests relacionados con parámetros negativos o igual a cero
