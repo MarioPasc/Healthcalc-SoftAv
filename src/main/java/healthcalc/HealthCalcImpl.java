@@ -30,18 +30,32 @@ public class HealthCalcImpl implements HealthCalc{
     public float basalMetabolicRate(float weight, int height, char gender, int age) throws Exception {
 
         // 1. El peso debe ser mayor que cero
-        // 2. La altura debe ser mayor que cero
-        // 3. La edad debe ser mayor que cero
-        // 4. El género debe estar dentro de los valores establecidos
+        // 2. El peso no debe causar un overflow del tipo de datos
+        // 3. La altura debe ser mayor que cero
+        // 4. La altura no debe causar un overflow del tipo de datos
+        // . La edad debe ser mayor que cero
+        // . El género debe estar dentro de los valores establecidos
         if (weight <= 0) {
             throw new IllegalArgumentException("El peso debe ser un valor positivo.");
         }
+        if (weight >= Integer.MAX_VALUE) { 
+            throw new IllegalArgumentException("El peso proporcionado es demasiado grande.");
+        }
+
         if (height <= 0) {
             throw new IllegalArgumentException("La altura debe ser un valor positivo.");
         }
+        if (height >= Integer.MAX_VALUE) { 
+            throw new IllegalArgumentException("La altura proporcionada es demasiado grande.");
+        }
+
         if (age <= 0) {
             throw new IllegalArgumentException("La edad debe ser un valor positivo.");
         }
+        if (age >= Integer.MAX_VALUE) { 
+            throw new IllegalArgumentException("La edad proporcionada es demasiado grande.");
+        }
+
         if (gender != 'm' && gender != 'w') {
             throw new IllegalArgumentException("El género debe ser 'm' (hombre) o 'w' (mujer).");
         }
