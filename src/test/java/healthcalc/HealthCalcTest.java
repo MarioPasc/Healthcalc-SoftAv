@@ -117,7 +117,7 @@ public class HealthCalcTest {
 	@DisplayName("Test peso overflow para basalMetabolicRate")
 	public void testPesoOverflowBasalMetabolicRate() {
 		assertThrows(IllegalArgumentException.class, 
-			() -> healthCalc.basalMetabolicRate(Integer.MAX_VALUE, 170, 'm', 20), 
+			() -> healthCalc.basalMetabolicRate(Float.MAX_VALUE, 170, 'm', 20), 
 			"El peso proporcionado es demasiado grande.");
 	}
 

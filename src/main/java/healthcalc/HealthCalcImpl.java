@@ -38,7 +38,7 @@ public class HealthCalcImpl implements HealthCalc{
         if (weight <= 0) {
             throw new IllegalArgumentException("El peso debe ser un valor positivo.");
         }
-        if (weight >= Integer.MAX_VALUE) { 
+        if (weight >= Float.MAX_VALUE) { 
             throw new IllegalArgumentException("El peso proporcionado es demasiado grande.");
         }
 
