@@ -20,9 +20,13 @@ public class HealthCalcImpl implements HealthCalc{
         
         // Calculamos el peso ideal:
         if (gender == 'm') {
-            return height - 100 - (height - 150) / 4f;
+            float pesoIdeal = height - 100 - (height - 150) / 4f;
+            if (pesoIdeal > 0) {return pesoIdeal;} 
+            else {throw new IllegalArgumentException("El peso ideal es cero o menor que cero.");}
         } else {
-            return height - 100 - (height - 150) / 2.5f;
+            float pesoIdeal = height - 100 - (height - 150) / 2.5f;
+            if (pesoIdeal > 0) {return pesoIdeal;} 
+            else {throw new IllegalArgumentException("El peso ideal es cero o menor que cero.");}
         }
     }
 
