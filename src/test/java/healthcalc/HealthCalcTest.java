@@ -51,10 +51,10 @@ public class HealthCalcTest {
 		"El género debe ser 'm' (hombre) o 'w' (mujer).");
 	}
 
-	// TESTS CAJA BLANCA - Funcionamiento esperado interno
+	// TESTS CAJA BLANCA - Funcionamiento esperado interno del método idealWeight
 	@Test
-    @DisplayName("Test peso ideal hombre usando fórmula")
-    public void testPesoIdealHombreConFormula() throws Exception {
+    @DisplayName("Test peso ideal hombre")
+    public void testPesoIdealHombre() throws Exception {
         int altura = 180;
         char genero = 'm';
         float pesoIdealEsperado = altura - 100 - (altura - 150) / 4f;
@@ -63,8 +63,8 @@ public class HealthCalcTest {
     }
 
     @Test
-    @DisplayName("Test peso ideal mujer usando fórmula")
-    public void testPesoIdealMujerConFormula() throws Exception {
+    @DisplayName("Test peso ideal mujer ")
+    public void testPesoIdealMujer() throws Exception {
         int altura = 180;
         char genero = 'w';
         float pesoIdealEsperado = altura - 100 - (altura - 150) / 2.5f;
@@ -158,6 +158,31 @@ public class HealthCalcTest {
 		() -> healthCalc.basalMetabolicRate(60, 170, 'x', 0), 
 		"El género debe ser 'm' (hombre) o 'w' (mujer).");
 	}
+
+	// TESTS CAJA BLANCA - Funcionamiento esperado interno del método basalMetabolicRate
+	@Test
+    @DisplayName("Test metabolismo basal mujer ")
+    public void testMetabolismoBasalMujer() throws Exception {
+        int height = 180;
+		float weight = 60;
+		int age = 20;
+        char genero = 'w';
+        float pesoIdealEsperado = 10 * weight + 6.25f * height - 5 * age - 161;
+        assertEquals(pesoIdealEsperado, healthCalc.basalMetabolicRate(weight, height, genero, age), 
+		"El cálculo del metabolismo basal para mujer no es correcto.");
+    }
+
+	@Test
+    @DisplayName("Test metabolismo basal mujer ")
+    public void testMetabolismoBasalHombre() throws Exception {
+        int height = 180;
+		float weight = 60;
+		int age = 20;
+        char genero = 'm';
+        float pesoIdealEsperado =  10 * weight + 6.25f * height - 5 * age + 5;
+        assertEquals(pesoIdealEsperado, healthCalc.basalMetabolicRate(weight, height, genero, age), 
+		"El cálculo del metabolismo basal para hombre no es correcto.");
+    }
 
 
 
