@@ -31,6 +31,22 @@ public class HealthCalcTest {
 		"La altura debe ser un número positivo.");
 	}
 
+	@Test
+	@DisplayName("Test peso ideal negativo para hombre -valor de salida")
+	public void testPesoIdealNegativoHombre() {
+		assertThrows(IllegalArgumentException.class, 
+		() -> healthCalc.idealWeight(50, 'm'), 
+		"El peso debe ser un valor positivo.");
+	}
+
+	@Test
+	@DisplayName("Test peso ideal negativo para mujer -valor de salida")
+	public void testPesoIdealNegativoMujer() {
+		assertThrows(IllegalArgumentException.class, 
+		() -> healthCalc.idealWeight(50, 'w'), 
+		"El peso debe ser un valor positivo.");
+	}
+
 	// Tests para valores que desbordan el tipo de datos
 
 	@Test
