@@ -97,6 +97,14 @@ Este test comprueba que la aplicación lanza una excepción cuando se introduce 
 
 En este test, se verifica que el sistema arroja una excepción cuando se suministra una edad que excede el límite máximo aceptable por el tipo de dato (overflow). 
 
+- **Test de Metabolismo Basal Negativo para Hombre** `testbasalMetabolicRatetNegativoHombre`
+
+Este test asegura que el sistema identifica y rechaza un cálculo de metabolismo basal que resulte negativo para un hombre, lo cual indicaría un error en el algoritmo o en la entrada de datos. 
+
+- **Test de Metabolismo Basal Negativo para Mujer** `testbasalMetabolicRatetNegativoHombre`
+
+Similar al anterior, pero enfocado en el género femenino, este test confirma que el sistema detecta y evita retornar un metabolismo basal negativo para una mujer. 
+
 - **Test de Género No Válido para Tasa Metabólica Basal** `testGeneroNoValidoBasalMetabolicRate`
 
 Este test verifica que el sistema lanza una excepción `IllegalArgumentException` al recibir un género que no sea 'm' (hombre) o 'w' (mujer) al calcular la tasa metabólica basal. 
@@ -128,8 +136,9 @@ Como se puede observar, todos los tests se han pasado satisfactoriamente. Esto e
 ## Uso de Git & Github durante el proyecto
 
 <p align="center">
-  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/deec6194-1f77-4940-a13d-b0affd620049" width="753" title="GIT">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/5ca2b0ff-b523-485a-ba84-d0620ded30fe" width="753" title="GIT">
 </p>
+
 
 **Desarrollo**
 
