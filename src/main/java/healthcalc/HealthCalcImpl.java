@@ -14,12 +14,12 @@ public class HealthCalcImpl implements HealthCalc{
         if (height >= Integer.MAX_VALUE) { 
             throw new IllegalArgumentException("La altura proporcionada es demasiado grande.");
         }
-        if (gender != 'm' && gender != 'w') {
+        if (Character.toLowerCase(gender) != 'm' && Character.toLowerCase(gender) != 'w') {
             throw new IllegalArgumentException("El género debe ser 'm' (hombre) o 'w' (mujer).");
         }
         
         // Calculamos el peso ideal:
-        if (gender == 'm') {
+        if (Character.toLowerCase(gender) == 'm') {
             float pesoIdeal = height - 100 - (height - 150) / 4f;
             if (pesoIdeal > 0) {return pesoIdeal;} 
             else {throw new IllegalArgumentException("El peso ideal es cero o menor que cero.");}
@@ -60,15 +60,19 @@ public class HealthCalcImpl implements HealthCalc{
             throw new IllegalArgumentException("La edad proporcionada es demasiado grande.");
         }
 
-        if (gender != 'm' && gender != 'w') {
+        if (Character.toLowerCase(gender) != 'm' && Character.toLowerCase(gender) != 'w') {
             throw new IllegalArgumentException("El género debe ser 'm' (hombre) o 'w' (mujer).");
         }
         
         // Calculate BMR using the specified formula
-        if (gender == 'm') {
-            return 10 * weight + 6.25f * height - 5 * age + 5;
+        if (Character.toLowerCase(gender) == 'm') {
+            float metabolicrate = 10 * weight + 6.25f * height - 5 * age + 5;
+            if (metabolicrate > 0) {return metabolicrate;} 
+            else {throw new IllegalArgumentException("El metabolismo basal es cero o menor que cero.");}
         } else {
-            return 10 * weight + 6.25f * height - 5 * age - 161;
+            float metabolicrate = 10 * weight + 6.25f * height - 5 * age - 161;
+            if (metabolicrate > 0) {return metabolicrate;} 
+            else {throw new IllegalArgumentException("El metabolismo basal es cero o menor que cero.");}
         }
     }
 }
