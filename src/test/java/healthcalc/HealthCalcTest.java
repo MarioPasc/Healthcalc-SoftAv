@@ -139,6 +139,22 @@ public class HealthCalcTest {
 			"La edad debe ser un número positivo.");
 	}
 
+	@Test
+	@DisplayName("Test peso ideal negativo para hombre -valor de salida")
+	public void testbasalMetabolicRateNegativoHombre() {
+		assertThrows(IllegalArgumentException.class, 
+		() -> healthCalc.basalMetabolicRate(1, 1, 'M', 50), 
+		"El metabolismo basal es cero o menor que cero.");
+	}
+
+	@Test
+	@DisplayName("Test peso ideal negativo para hombre -valor de salida")
+	public void testbasalMetabolicRateNegativoMujer() {
+		assertThrows(IllegalArgumentException.class, 
+		() -> healthCalc.basalMetabolicRate(1, 1, 'w', 50), 
+		"El metabolismo basal es cero o menor que cero.");
+	}
+
 	// Tests para valores de entrada que desbordan el tipo de datos
 
 	@Test
@@ -171,7 +187,7 @@ public class HealthCalcTest {
 	@DisplayName("Test género no válido para basalMetabolicRate")
 	public void testGeneroNoValidoBasalMetabolicRate() {
 		assertThrows(IllegalArgumentException.class, 
-		() -> healthCalc.basalMetabolicRate(60, 170, 'x', 0), 
+		() -> healthCalc.basalMetabolicRate(60, 170, 'X', 17), 
 		"El género debe ser 'm' (hombre) o 'w' (mujer).");
 	}
 
