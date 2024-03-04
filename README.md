@@ -122,11 +122,11 @@ Este test confirma que el cálculo de la tasa metabólica basal para un hombre s
 ## Resultado de los tests
 
 ```xml
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="healthcalc.HealthCalcTest" time="0.063" tests="1" errors="0" skipped="0" failures="0">
+version="3.0" name="healthcalc.HealthCalcTest" time="0.063" tests="1" errors="0" skipped="0" failures="0">
 ```
 
 <p align="center">
-  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/48041dd4-c19f-44a3-a542-20d395949866" height="250" title="XML Tests">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/af179b2e-f13d-422e-9bc6-50c2561c8f8f" height="250" title="XML Tests">
   <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/e5307c5f-fa0c-4e99-b683-61c5183236c5" height="250" title="tests1">
 </p>
 
