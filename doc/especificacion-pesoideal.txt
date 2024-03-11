@@ -1,0 +1,26 @@
+Nombre: Cálculo Peso Ideal
+Stakeholders: 
+    - Usuario: Poder realizar el cálculo de su peso ideal.
+    - Equipo de desarrollo del software: Asegurar que el programa HealCalc se usa y desempeña con normalidad.
+Actor principal: Usuario
+Alcance (scope): Aplicación HealthCalc
+Nivel de abstracción: USER GOAL. Se describe una interacción usuario-sistema
+Precondiciones:
+    - El usuario puede ejecutar el programa de la calculadora con éxito
+Garantías:
+    - Mínima: Se muestra un mensaje de error al usuario, explicando qué parte ha fallado. 
+    - De Éxito: Se devuelve el peso ideal del usuario.
+Trigger: El usuario selecciona la opción de Calcular Peso Ideal en el programa HealthCalc.
+Escenario principal:
+    1. El usuario selecciona la opción "Calcular Peso Ideal" en el programa HealthCalc.
+    2. El sistema solicita al usuario los parámetros a rellenar. 
+    3. El usuario introduce los valores de los parámetros. 
+    4. El sistema aplica la fórmula con los parámetros introducidos. 
+    5. El sistema muestra el resultado.
+Extensiones:
+    3a. El usuario introduce parámetros no válidos.
+        3a.1. El sistema muestra un mensaje de error, indicando qué campos son incorrectos.
+        3a.2. Se vuelve a 2.
+    4a. El resultado está fuera de un rango. 
+        4a.1. El sistema muestra un mensaje de error, indicando que el valor de salida es negativo o cero. 
+        4a.2. Se vuelve a 2.  
