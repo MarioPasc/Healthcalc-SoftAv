@@ -1,4 +1,4 @@
-package healthcalc;
+package uma;
 
 public class HealthCalcImpl implements HealthCalc{
 

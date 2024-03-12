@@ -1,4 +1,4 @@
-package healthcalc;
+package uma;
 
 /**
  * Calculator of some health parameters of persons.
