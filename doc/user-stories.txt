@@ -1,0 +1,31 @@
+User Stories. 
+
+IdealWeight:
+"As a HealthCalc User
+I want to input my gender and height into the calculator
+So that I can calculate my ideal weight"
+
+BasalMetabolicRate:
+"As a nutritionist
+I want to determine the basal metabolic rate of my client
+So that I can elaborate a better diet plan for him/her"
+
+
+Acceptance Criteria.
+
+IdealWeight:
+(1)
+Given I am a HealthCalc user
+When I input my gender as "<gender>" and height as <height> into the calculator
+Then the calculator should calculate and display my ideal weight as <expected_ideal_weight>
+
+(2)
+Given I am a HealthCalc user
+When I input my gender as "<gender>" and height as <height> into the calculator
+Then the calculator should raise an error
+
+(3)
+Given I am a HealthCalc user
+When I input my gender as "<gender>" and height as <height> into the calculator
+Then the ideal weight is negative or zero and the calculator should raise an error
+
