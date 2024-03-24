@@ -18,14 +18,16 @@ public class IdealWeightSteps {
     private float calculatedIdealWeight;
     private HealthCalcImpl healthcalc; 
     private boolean error;
+    private String exceptionMessage;
 
     @Before
     public void initialization() {
-        height = 0;
-        gender = ' ';
-        calculatedIdealWeight = 0;
-        healthcalc = null;
-        error = false;
+        this.height = 0;
+        this.gender = ' ';
+        this.calculatedIdealWeight = 0;
+        this.healthcalc = null;
+        this.error = false;
+        this.exceptionMessage = "";
     }
 
     @Given("I am a HealthCalc user")
@@ -41,8 +43,18 @@ public class IdealWeightSteps {
         try {
             calculatedIdealWeight = healthcalc.idealWeight(height, genderChar); 
         } catch (Exception e) {
+            this.exceptionMessage = e.getMessage().toLowerCase();
             error = true;
         }
+    }
+
+    @When("I input a height value that is too high for IdealWeight")
+    public void i_input_a_height_value_that_is_too_high_for_idealweight() {
+        try {
+            calculatedIdealWeight = healthcalc.idealWeight(Integer.MAX_VALUE, 'm');
+        } catch (Exception e) {
+            this.exceptionMessage = e.getMessage().toLowerCase();        
+        } 
     }
 
     @Then("the calculator should calculate and display my ideal weight as {float}")
@@ -52,11 +64,35 @@ public class IdealWeightSteps {
 
     @Then("the calculator should raise an error")
     public void the_calculator_should_raise_an_error() {
+        // Se comprueba si la calculadora es capaz de mostrar un mensaje específico para estos
+        // casos de error. 
+        if ((this.exceptionMessage.contains("número positivo") || 
+             this.exceptionMessage.contains("género debe ser"))) {
+                this.error = true;
+             }
         Assertions.assertTrue(error);
+        
     }
 
     @Then("the ideal weight is negative or zero and the calculator should raise an error")
     public void the_ideal_weight_is_negative_or_zero_and_the_calculator_should_raise_an_error() {
+        // Se comprueba si la calculadora es capaz de mostrar un mensaje específico para este
+        // caso de error. 
+        if (this.exceptionMessage.contains("peso ideal es cero o menor que cero.")) {
+            this.error = true;
+        }
         Assertions.assertTrue(error);
+
+    }
+
+    @Then("the calculator should throw an overflow error")
+    public void the_calculator_should_throw_an_overflow_error() {
+        // Se comprueba si la calculadora es capaz de mostrar un mensaje específico para este
+        // caso de error. 
+         if (this.exceptionMessage.contains("demasiado grande")) {
+            this.error = true;
+         }
+        Assertions.assertTrue(error);
+        
     }
 }
