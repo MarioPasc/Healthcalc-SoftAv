@@ -14,10 +14,11 @@
 
 - [Práctica 1: Tests](#práctica-1-tests)
 - [Práctica 2: Casos de Uso](#práctica-2-casos-de-uso)
+- [Práctica 3: BDD](#práctica-3-bdd)
 
 </details>
 
-## Práctica 1: Tests
+# Práctica 1: Tests
   
 El principal objetivo de esta sección es desarrollar los métodos `idealWeight` y `basalMetabolicRate` para la clase `HealthCalcImp` siguiendo una metodología TDD (*Test-Driven Development*). Se ha aplicado la metodología siguiendo el siguiente flujo de trabajo: 
 
@@ -161,7 +162,7 @@ Como se puede observar, todos los tests se han pasado satisfactoriamente. Esto e
 - Una vez arreglado el error, volví a la rama `testsCajaBlanca` para revisar el contenido. Finalmente uní las ramas con `git merge` y terminé de desarrollar unos tests de caja negra. 
 </details>
 
-## Práctica 2: Casos de Uso
+# Práctica 2: Casos de Uso
 
 El principal objetivo de esta sección es desarrollar diagramas de casos de uso del proyecto y la especificación de uno de los casos de uso. 
 
@@ -246,6 +247,121 @@ Extensiones:
 Como se puede observar, se han creado dos nuevas ramas. La rama `practica1` hace referencia a la versión de `main` en la que está contenida toda la práctica 1. 
 
 Por otra parte, la rama `practica2` está destinada a almacenar todos los cambios de la práctica 2. Estos cambios aún no se muestran en el repositorio ya que esta rama no ha sido unida (`git merge`) con la rama `main` aún, sin embargo, su contenido está disponible en los anteriores apartados de este fichero readme. 
+
+</details>
+
+# Práctica 3: BDD
+
+El principal objetivo de esta práctica es implementar user stories y criterios de aceptación utilizando la metodología **Behavior-Driven Development (BDD)**, a través del uso de **Cucumber y el lenguaje Gherkin**. Dentro del repositorio, se encuentran los archivos:
+1. **.feature**, los cuales contienen las implementaciones detalladas de los criterios de aceptación en Gherkin.
+2. **.java** con el código de los pasos (steps) necesarios para ejecutar estas definiciones en pruebas automatizadas.
+3. **.txt** en el directorio ./docs/ con las definiciones en lenguaje natural de las user stories y los criterios de aceptación. Las user stories siguen la estructura "Como [rol], Quiero [función], Para [beneficio]" para describir las necesidades y objetivos de los usuarios. Los criterios de aceptación se estructuran como "Dado que [contexto], Cuando [acción], Entonces [resultado esperado]" para especificar el comportamiento esperado del sistema bajo diferentes condiciones.
+
+**Estructura de ficheros del proyecto**
+```bash
+Healthcalc-SoftAv/
+├── doc/
+│   └── user-stories.txt
+├── src/
+│   ├── main_java/uma/
+│   │   ├── HealthCalc.java
+│   │   └── HealthCalcImpl.java
+│   └── test/
+│       ├── java/uma/
+│       │   ├── bdd/
+│       │   │   ├── BasalMetabolicRateSteps.java
+│       │   │   ├── IdealWeightSteps.java
+│       │   │   └── RunCucumberTest.java
+│       │   └── HealthCalcTest.java
+│       └── resources/uma/
+│           ├── basalMetabolicRate.feature
+│           └── idealWeight.feature
+└── pom.xml
+```
+
+<details>
+<summary>Historias de Usuario y Criterios de Aceptación</summary>
+
+### User Stories
+
+#### IdealWeight:
+> "As a HealthCalc User  
+I want to input my gender and height into the calculator  
+So that I can calculate my ideal weight"
+
+#### BasalMetabolicRate:
+> "As a nutritionist  
+I want to determine the basal metabolic rate of my client  
+So that I can elaborate a better diet plan for him/her"
+
+### Acceptance Criteria
+
+#### IdealWeight:
+
+**Scenario: Calculate ideal weight with valid parameters**
+- Given I am a HealthCalc user
+- When I input my gender and height into the calculator
+- Then the calculator should calculate and display my ideal weight.
+
+**Scenario: Display error when input parameters are incorrect**  
+(e.g. height less or equal to zero, gender not recognized by the system)
+- Given I am a HealthCalc user
+- When I input my gender and height into the calculator
+        *AND* the system recognizes the inputs as invalid
+- Then the calculator should display a specific error message guiding me to enter a valid gender and height.
+
+**Scenario: Display error when input height exceeds the max value admitted by the datatype (int)**
+- Given I am a HealthCalc user
+- When I input a height value that is too high for IdealWeight
+- Then the calculator should throw an overflow error
+
+**Scenario: Display error when computed ideal weight is negative or zero**
+- Given I am a HealthCalc user
+- When I input my gender and height into the calculator
+       *AND* the computed ideal weight is less or equal to zero 
+- Then the calculator should display an error message indicating an unrealistic output.
+
+#### BasalMetabolicRate:
+
+**Scenario: Calculate the basal metabolic rate with valid inputs**
+- Given I am a nutritionist
+- When I input my client's weight, age, height, and gender into the calculator
+- Then the calculator should compute and display its basal metabolic rate.
+
+**Scenario: Display error when input parameters are incorrect**  
+(e.g., gender not recognized by the system, numeric inputs less or equal to zero)
+- Given I am a nutritionist
+- When I input my client's weight, age, height, and gender into the calculator
+  *AND* the inputs are recognized as invalid by the system
+- Then the calculator should display specific error messages for each type of invalid input.
+
+**Scenario: Display error when numeric input parameters are too high**  
+(INTEGER.MAX_VALUE for age and height and FLOAT.MAX_VALUE for weight) 
+- Given I am a nutritionist
+- When I input values for my client's weight, age, or height 
+  *AND* any value is too high for its datatype 
+- Then the calculator should display an overflow error.
+
+**Scenario: Display error when computed basal metabolic rate is negative or zero**
+- Given I am a nutritionist
+- When I input my client's weight, age, height, and gender into the calculator
+  *AND* the computed basal metabolic rate is less or equal to zero 
+- Then the calculator should display an error message indicating unrealistic output value.
+
+</details>
+
+<details>
+<summary>Uso de Git & Github durante la práctica 3</summary>
+
+<p align="center">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/b59423f8-307b-4b06-b426-0bf4aadc1f17" width="753" title="GIT">
+</p>
+
+**Desarrollo**
+
+Como se puede observar, para mantener un desarrollo limpio e independiente de las otras prácticas, se ha creado una nueva rama, `practica3`, en la cual se han hecho los commits adecuados. 
+
+Principalmente se pueden obserar 4 commits, el primero incluye una configuración correcta de las dependencias del fichero `pom.xml`, además de el ajuste del `RunCucumberTest.java` para la estructura de ficheros del proyecto. Los siguientes dos commits incluyen las implementaciones de los ficheros `.feature` y su correspondiente `*Steps.java` para los métodos `idealWeight` y `basalMetabolicRate`. Finalmente, se ha realizado un commit con el fichero .txt que contiene el log de la ejecución de los tests, este fichero se ha podido obtener ejecutando `mvn test > ./doc/output-tests.txt` en la terminal desde la carpeta del proyecto. 
 
 </details>
 
