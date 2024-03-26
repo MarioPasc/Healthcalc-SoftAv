@@ -48,6 +48,31 @@ public class IdealWeightSteps {
         }
     }
 
+    @When("I input {int} as my height value, less or equal to zero AND my gender as {string}")
+    public void i_input_as_my_height_value_less_or_equal_to_zero(int height, String gender) {
+        char genderChar = gender.charAt(0); 
+        this.gender = genderChar;
+        this.height = height;
+        try {
+            calculatedIdealWeight = healthcalc.idealWeight(height, genderChar); 
+        } catch (Exception e) {
+            this.exceptionMessage = e.getMessage().toLowerCase();
+            error = true;
+        }
+    }
+
+    @When("I input a gender not recognized by the system")
+    public void i_input_as_my_gender_not_recognized_by_the_system() {
+        this.gender = 'X';
+        this.height = 170;
+        try {
+            calculatedIdealWeight = healthcalc.idealWeight(this.height, this.gender); 
+        } catch (Exception e) {
+            this.exceptionMessage = e.getMessage().toLowerCase();
+            error = true;
+        }
+    }
+
     @When("I input a height value that is too high for IdealWeight")
     public void i_input_a_height_value_that_is_too_high_for_idealweight() {
         try {

@@ -9,6 +9,7 @@ import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.lu.an;
 import uma.HealthCalcImpl;
 
 public class BasalMetabolicRateSteps {
@@ -40,6 +41,32 @@ public class BasalMetabolicRateSteps {
 
     @When("I input my clients {float}, {int}, {int} and {string} into the calculator")
     public void i_input_my_clients_weight_height_age_and_gender_into_the_calculator(float weight, int age, int height, String gender){
+        char genderChar = gender.charAt(0); 
+        this.weight = weight;
+        this.age = age;
+        this.height = height;
+        try {
+            calcBasalMetabolicRate = healthCalc.basalMetabolicRate(weight, height, genderChar, age); 
+        } catch (Exception e) {
+            this.exceptionMessage = e.getMessage().toLowerCase();
+        }
+    }
+
+    @When("I input my clients {float}, {int}, {int} and {string} into the calculator, at least one of these values is incorrect")
+    public void i_input_my_clients_weight_height_age_and_gender_into_the_calculator_at_least_one_of_these_values_is_incorrect(float weight, int age, int height, String gender){
+        char genderChar = gender.charAt(0); 
+        this.weight = weight;
+        this.age = age;
+        this.height = height;
+        try {
+            calcBasalMetabolicRate = healthCalc.basalMetabolicRate(weight, height, genderChar, age); 
+        } catch (Exception e) {
+            this.exceptionMessage = e.getMessage().toLowerCase();
+        }
+    }
+
+    @When("I input my clients {float}, {int}, {int} and {string} into the calculator AND the computed BMR is negative or zero")
+    public void i_input_my_clients_weight_height_age_and_gender_into_the_calculator_AND_the_computed_BMR_is_negative_or_zero(float weight, int age, int height, String gender){
         char genderChar = gender.charAt(0); 
         this.weight = weight;
         this.age = age;
@@ -92,8 +119,8 @@ public class BasalMetabolicRateSteps {
         Assertions.assertTrue(this.error);
     }
 
-    @Then("the basal metabolic rate is negative or zero and the calculator should raise an error")
-    public void the_basal_metabolic_rate_is_negative_or_zero_and_the_calculator_should_raise_an_error() {
+    @Then("the calculator should raise an error indicating an unrealistic value")
+    public void the_calculator_should_raise_an_error_indicating_an_unrealistic_value() {
         if (this.exceptionMessage.contains("es cero o menor que cero")) {
             this.error = true;
         }

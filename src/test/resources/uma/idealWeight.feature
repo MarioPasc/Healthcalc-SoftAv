@@ -17,9 +17,9 @@ So I can calculate my ideal weight"
       | w      | 160    | 56                    |
 
   @tag2
-  Scenario: Display error when input parameters are incorrect
+  Scenario Outline: Display error when input height is incorrect
     Given I am a HealthCalc user
-    When I input my gender as "<gender>" and height as <height> into the calculator
+    When I input <height> as my height value, less or equal to zero AND my gender as "<gender>"
     Then the calculator should raise an error
 
     Examples:
@@ -28,10 +28,15 @@ So I can calculate my ideal weight"
       | w      | 0      | True  |
       | m      | -1     | True  |
       | w      | -1     | True  |
-      | XXXX   | 170    | True  |
+
+  @tag3    
+  Scenario: Display error when input gender is incorrect
+    Given I am a HealthCalc user
+    When I input a gender not recognized by the system
+    Then the calculator should raise an error
       
-  @tag3
-  Scenario: Display error when computed ideal weight is negative or zero 
+  @tag4
+  Scenario Outline: Display error when computed ideal weight is negative or zero 
     Given I am a HealthCalc user
     When I input my gender as "<gender>" and height as <height> into the calculator
     Then the ideal weight is negative or zero and the calculator should raise an error
@@ -41,7 +46,7 @@ So I can calculate my ideal weight"
       | 'm'    | 1       | True  |
       | 'w'    | 1       | True  |
 
-  @tag4
+  @tag5
   Scenario: Display error when input height exceeds the max value admitted by the datatype
     Given I am a HealthCalc user
     When I input a height value that is too high for IdealWeight

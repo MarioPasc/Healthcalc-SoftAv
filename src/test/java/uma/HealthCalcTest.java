@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import uma.HealthCalcImpl;
+
 @DisplayName("Tests para la calculadora de salud.")
 public class HealthCalcTest {
 
@@ -140,7 +142,7 @@ public class HealthCalcTest {
 	}
 
 	@Test
-	@DisplayName("Test metabolismo basal negativo para hombre -valor de salida")
+	@DisplayName("Test peso ideal negativo para hombre -valor de salida")
 	public void testbasalMetabolicRateNegativoHombre() {
 		assertThrows(IllegalArgumentException.class, 
 		() -> healthCalc.basalMetabolicRate(1, 1, 'M', 50), 
@@ -148,7 +150,7 @@ public class HealthCalcTest {
 	}
 
 	@Test
-	@DisplayName("Test metabolismo basal negativo para hombre -valor de salida")
+	@DisplayName("Test peso ideal negativo para hombre -valor de salida")
 	public void testbasalMetabolicRateNegativoMujer() {
 		assertThrows(IllegalArgumentException.class, 
 		() -> healthCalc.basalMetabolicRate(1, 1, 'w', 50), 

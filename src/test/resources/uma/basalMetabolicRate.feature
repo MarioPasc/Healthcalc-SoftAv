@@ -19,7 +19,7 @@ So that I can elaborate a better diet plan for him/her"
   @tag2
   Scenario Outline: Display error when input parameters are incorrect
     Given I am a nutritionist
-    When I input my clients <weight>, <age>, <height> and "<gender>" into the calculator
+    When I input my clients <weight>, <age>, <height> and "<gender>" into the calculator, at least one of these values is incorrect
     Then the calculator should display specific error messages for each type of invalid input
 
     Examples:
@@ -35,8 +35,8 @@ So that I can elaborate a better diet plan for him/her"
   @tag3
   Scenario Outline: Display error when computed basal metabolic rate is negative or zero 
     Given I am a nutritionist
-    When I input my clients <weight>, <age>, <height> and "<gender>" into the calculator
-    Then the basal metabolic rate is negative or zero and the calculator should raise an error
+    When I input my clients <weight>, <age>, <height> and "<gender>" into the calculator AND the computed BMR is negative or zero
+    Then the calculator should raise an error indicating an unrealistic value
 
     Examples:
       | weight | age  | height | gender | error |
