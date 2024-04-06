@@ -1,6 +1,7 @@
-package uma;
+package uma.GUI;
 
 import java.awt.EventQueue;
+
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,12 +10,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
+
 import javax.swing.JTextField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class HealthCalcVista {
 
@@ -23,12 +24,11 @@ public class HealthCalcVista {
 	private JTextField HeightValue;
 	private JTextField IdealWeightResults;
 	private JTextField BMRResults;
-	
-	private char gender = 'x';
-	private int height = 0;
-	private int age = 0;
-	private float weight = 0;
-	private uma.HealthCalcImpl calculatora = new HealthCalcImpl();
+	private JButton MaleButton;
+	private JButton FemaleButton;
+	private JSpinner AgeValue;
+	private JButton CalcBMR;
+	private JButton CalcIdealWeight;
 	
 	/**
 	 * Launch the application.
@@ -87,29 +87,13 @@ public class HealthCalcVista {
 		frame.getContentPane().add(GenderLabel);
 		
 		// Botones de Género
-		JButton MaleButton = new JButton("Male");
-		JButton FemaleButton = new JButton("Female");
-		
-		
-		MaleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				MaleButton.setBackground(new Color(244, 182, 194));
-				FemaleButton.setBackground(Color.WHITE);
-				gender = 'm';
-			}
-		});
-		
-		FemaleButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				FemaleButton.setBackground(new Color(244, 182, 194));
-				MaleButton.setBackground(Color.WHITE);
-				gender = 'w';
-			}
-		});
+		MaleButton = new JButton("Male");
+		FemaleButton = new JButton("Female");
 		
 		MaleButton.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		MaleButton.setBounds(337, 76, 121, 36);
 		frame.getContentPane().add(MaleButton);
+		
 		FemaleButton.setFont(new Font("SansSerif", Font.PLAIN, 15));
 		FemaleButton.setBounds(532, 76, 121, 36);
 		frame.getContentPane().add(FemaleButton);
@@ -119,7 +103,7 @@ public class HealthCalcVista {
 		lblAge.setBounds(285, 123, 88, 29);
 		frame.getContentPane().add(lblAge);
 		
-		JSpinner AgeValue = new JSpinner();
+		AgeValue = new JSpinner();
 		AgeValue.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		AgeValue.setBounds(427, 151, 135, 36);
 		frame.getContentPane().add(AgeValue);
@@ -155,61 +139,8 @@ public class HealthCalcVista {
 		frame.getContentPane().add(lblNewLabel_1_1);
 		
 		// Botones Cálculo de IdealWeight y BasalMR
-		JButton CalcIdealWeight = new JButton("Calculate Ideal Weight");
-		JButton CalcBMR = new JButton("Calculate Basal MR");
-		CalcBMR.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					height = Integer.parseInt(HeightValue.getText());
-					weight = Float.parseFloat(WeightValue.getText());
-					age = (Integer) AgeValue.getValue();
-					
-					try {
-						float bmr = calculatora.basalMetabolicRate(weight, height, gender, age);
-			            BMRResults.setText(String.valueOf(bmr));
-					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(frame,
-				                e1.getMessage(),
-				                "Ingrese números válidos para la altura, peso, género y edad",
-				                JOptionPane.ERROR_MESSAGE);
-					}
-				} catch (Exception e0) {
-					JOptionPane.showMessageDialog(frame,
-			                "Debe rellenar los campos necesarios.",
-			                "Ingrese números válidos para la altura y el peso.",
-			                JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		});
-		
-		CalcIdealWeight.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					height = Integer.parseInt(HeightValue.getText());
-					
-					try {
-						float idealWeight = calculatora.idealWeight(height, gender);
-			            IdealWeightResults.setText(String.valueOf(idealWeight));
-					} catch (Exception e1) {
-						JOptionPane.showMessageDialog(frame,
-				                e1.getMessage(),
-				                "Ingrese números válidos para la altura y el género.",
-				                JOptionPane.ERROR_MESSAGE);
-					} 
-					
-				} catch (Exception e0) {
-					JOptionPane.showMessageDialog(frame,
-			                "Debe rellenar los campos necesarios.",
-			                "Ingrese números válidos para la altura y el peso.",
-			                JOptionPane.ERROR_MESSAGE);
-				}
-			}
-		});
-		
-		
-		
-		
-		
+		CalcIdealWeight = new JButton("Calculate Ideal Weight");
+		CalcBMR = new JButton("Calculate Basal MR");
 		CalcBMR.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		CalcBMR.setBounds(532, 371, 173, 55);
 		frame.getContentPane().add(CalcBMR);
@@ -245,5 +176,90 @@ public class HealthCalcVista {
 		lblNewLabel_1_2_1.setFont(new Font("SansSerif", Font.PLAIN, 13));
 		lblNewLabel_1_2_1.setBounds(656, 502, 49, 25);
 		frame.getContentPane().add(lblNewLabel_1_2_1);
+		
+		frame.pack();
+		frame.setSize(800, 600);
+		frame.setVisible(true);
 	}
+
+	public JTextField getWeightValue() {
+		return WeightValue;
+	}
+
+	public JTextField getHeightValue() {
+		return HeightValue;
+	}
+
+	public JTextField getIdealWeightResults() {
+		return IdealWeightResults;
+	}
+
+	public JTextField getBMRResults() {
+		return BMRResults;
+	}
+
+	public JButton getMaleButton() {
+		return MaleButton;
+	}
+
+	public JButton getFemaleButton() {
+		return FemaleButton;
+	}
+
+	public JSpinner getAgeValue() {
+		return AgeValue;
+	}
+
+	public JButton getCalcBMR() {
+		return CalcBMR;
+	}
+
+	public JButton getCalcIdealWeight() {
+		return CalcIdealWeight;
+	}
+	
+	public void registrarControlador(ActionListener ctrl) {
+		CalcBMR.addActionListener(ctrl);
+		CalcBMR.setActionCommand("getBMR");
+        
+		CalcIdealWeight.addActionListener(ctrl);
+		CalcIdealWeight.setActionCommand("getIdealW");
+        
+		MaleButton.addActionListener(ctrl);
+		MaleButton.setActionCommand("maleButton");
+        
+		FemaleButton.addActionListener(ctrl);
+		FemaleButton.setActionCommand("femaleButton");
+	}
+	
+	public void setBMRResults(float res) {
+		BMRResults.setText(String.valueOf(res));
+	}
+	
+	public void setIdealWResults(float res) {
+		IdealWeightResults.setText(String.valueOf(res));
+	}
+	
+	public void invalidInputsIdealWError(String errCode) {
+		JOptionPane.showMessageDialog(frame,
+				errCode,
+                "Ingrese números válidos para la altura y género",
+                JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void invalidInputsBMR(String errCode) {
+		JOptionPane.showMessageDialog(frame,
+                errCode,
+                "Ingrese números válidos para la altura, peso, género y edad",
+                JOptionPane.ERROR_MESSAGE);
+	}
+	
+	public void noInputsErr() {
+		JOptionPane.showMessageDialog(frame,
+                "Debe rellenar los campos necesarios antes de calcular",
+                "Ha sucedido un error",
+                JOptionPane.ERROR_MESSAGE);
+	}
+	
+	
 }
