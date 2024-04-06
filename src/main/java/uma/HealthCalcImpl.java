@@ -61,7 +61,7 @@ public class HealthCalcImpl implements HealthCalc{
         }
 
         if (Character.toLowerCase(gender) != 'm' && Character.toLowerCase(gender) != 'w') {
-            throw new IllegalArgumentException("El género debe ser 'm' (hombre) o 'w' (mujer).");
+            throw new IllegalArgumentException("Debe elegir un género");
         }
         
         // Calculate BMR using the specified formula
