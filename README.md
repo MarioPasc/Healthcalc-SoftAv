@@ -15,6 +15,7 @@
 - [Práctica 1: Tests](#práctica-1-tests)
 - [Práctica 2: Casos de Uso](#práctica-2-casos-de-uso)
 - [Práctica 3: BDD](#práctica-3-bdd)
+- [Práctica 4: Interfaz Gráfica de Usuario](#práctica-4-interfaz-gráfica-de-usuario)
 
 </details>
 
@@ -181,7 +182,7 @@ En el diagrama de casos de uso básico podemos observar que se modela la funcion
 <summary>Diagrama de Casos de Uso - Extendido</summary>
 
 <p align="center">
-  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/00e4bfbe-4a77-4010-8388-30440490bdde" width="805" title="casosusodiag1">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/00e4bfbe-4a77-4010-8388-30440490bdde" width="805" title="casosusodiag2">
 </p>
 
 En el diagrama de casos de uso extendido incluye además dos métodos que también realizan un cálculo utilizando parámetros introducidos por teclado. Estos dos nuevos métodos tienen una relación con *Realizar Cálculo* y *Introducir Parámetros* similar a la que tenían los métodos `idealWeight` y `basalMetabolicRate`. 
@@ -365,6 +366,59 @@ Principalmente se pueden obserar 4 commits, el primero incluye una configuració
 
 </details>
 
+# Práctica 4: Interfaz Gráfica de Usuario
+
+Durante esta etapa de desarrollo se ha implementado la interfaz gráfica de usuario para la calculadora de salud. Esta implementación se ha realizado siguiendo una serie de directrices:
+1. **Modelo Vista-Controlador**. Se ha utilizado *WindowBuilder* para que la implementación de la interfaz gráfica sea más amigable. Una vez creada la vista, se ha desarrollando una clase *Controlador*, este controlador llevará asociado la GUI de HealthCalc, y será el encargado de manejar todos los eventos provocados por los botones de la vista. Finalmente, se ha creado una clase *Main*, encargada de la integración de la vista y el controlador.
+  
+2. **Principios generales de usabilidad de J. Nielsen**. Durante el diseño de la GUI se han intentado seguir todos los principios generales de usabilidad posibles. Teniendo en cuenta el alcance actual de la aplicación, los principios que más se han respetado han sido:
+    - Utilizar el lenguaje de los usuarios   
+    - Prevención de errores
+    - Minimizar la carga de la memoria del usuario
+    - Diálogos estéticos y de diseño minimalista
+    - Ayuda al usuarios a reconocer, diagnosticar y recuperarse de los errores
+  
+<details>
+<summary>GUI: Protipo Inicial</summary>
+Teniendo en cuenta todas las historias de usuario y casos de uso desarrollados durante las anteriores etapas del proyecto se propuso la siguiente interfaz preliminar:
+
+<p align="center">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/753f2c09-7573-47ed-86ab-16e6341f5d17" width="753" title="gui-sketch">
+</p>
+
+Se proporciona en la imagen superior entonces la interfaz principal (izquierda) y un breve resumen del formato de los cuadros de diálogo que pueden surgir si se dan los casos descritos en las historias de usuario o casos de uso (p.ej. Valores de entrada incorrectos, valores de salida irrealistas, etc.). Este prototipo ofrece un diseño minimalista y funcional, fácil de usar y con una paleta de colores agradable. 
+
+</details>
+
+<details>
+<summary>GUI: Implementación</summary>
+Una vez se ha partido de ese sketch inicial, se ha optado por este modelo final:
+
+<p align="center">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/d194dda0-1adf-4255-a95e-510641b91fc2" width="753" title="gui-implementacion">
+</p>
+
+La paleta y la distribución de paneles original que imita el diseño tradicional de una operación (elementos de entrada arriba, separados de los elementos de salida por una línea horizontal) se mantiene, eliminando algunos elementos para disminuir la complejidad del diseño y aumentar su minimalismo. Se implementa la posibilidad de introducir el parámetro "Edad" usando el teclado o el ratón. 
+
+
+
+</details>
+
+<details>
+<summary>Uso de Git & Github durante la práctica 4</summary>
+
+<p align="center">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/60b37a07-5f0c-444d-90f3-ef4a9a4682c3" width="753" title="gitpractica4">
+</p>
+
+Durante el desarrollo de esta etapa del proyecto se han hecho una serie de commits significativos. Se empezó por la vista para poder nombrar a los elementos que formarían parte de la distribución de la ventana, seguido del controlador, encargado de añadirle funcionalidad a los elementos que lo requerían, para terminar con el desarrollo de código con el commit "Modelo Vista-Controlador Implementado", el cual representa la *primera versión funcional* del ejecutable .JAR
+Se finalizó con el aporte de la documentación correspondiente, así como el ejecutable .JAR, el cual fue probado desde la terminal con el comando:
+
+```bash
+java -jar HealthCalc.jar
+```
+
+</details>
 
 ## Cómo Usar
 
