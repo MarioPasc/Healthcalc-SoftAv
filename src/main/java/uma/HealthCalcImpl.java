@@ -1,7 +1,18 @@
 package uma;
 
 public class HealthCalcImpl implements HealthCalc{
-	//
+    // Patrón Singleton Aplicado
+	private static HealthCalcImpl instance;
+
+    private HealthCalcImpl() {}
+
+    public static HealthCalcImpl getInstance() {
+        if (instance == null) {
+            instance = new HealthCalcImpl();
+        }
+        return instance;
+    }
+
     @Override
     public float idealWeight(int height, char gender) throws Exception {
 

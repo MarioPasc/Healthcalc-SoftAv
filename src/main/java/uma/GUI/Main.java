@@ -10,7 +10,7 @@ public class Main {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					HealthCalcImpl healthCalc = new HealthCalcImpl();
+					HealthCalcImpl healthCalc = HealthCalcImpl.getInstance();
 					HealthCalcVista vista = new HealthCalcVista();
 					Controlador controlador = new Controlador(healthCalc, vista);
 					vista.registrarControlador(controlador);

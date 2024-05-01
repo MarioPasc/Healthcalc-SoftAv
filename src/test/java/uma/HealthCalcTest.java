@@ -6,12 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import uma.HealthCalcImpl;
 
 @DisplayName("Tests para la calculadora de salud.")
 public class HealthCalcTest {
 
-	private final HealthCalcImpl healthCalc = new HealthCalcImpl();
+	private final HealthCalcImpl healthCalc = HealthCalcImpl.getInstance();
 	
 	// Tests para el método "idealWeight" de la clase HealthCalcImpl
 
