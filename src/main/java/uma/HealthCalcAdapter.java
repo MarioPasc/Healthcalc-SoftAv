@@ -1,10 +1,11 @@
 package uma;
 
 public class HealthCalcAdapter implements HealthHospital {
-    private HealthCalc healthCalc;
+    private StatsProxy healthCalcRecordStats;
 
     public HealthCalcAdapter() {
-        healthCalc = HealthCalcImpl.getInstance();
+        // No tenemos que pasarle una instancia de la calculadora ya que se ha aplicado Singleton
+        this.healthCalcRecordStats = new StatsProxy();
     }
 
     @Override
@@ -13,7 +14,7 @@ public class HealthCalcAdapter implements HealthHospital {
         float pesoEnKg = peso / 1000.0f; // Convertir gramos a kilogramos
         
         try {
-            float bmr = healthCalc.basalMetabolicRate(pesoEnKg, (int) alturaEnCm, genero, edad);
+            float bmr = healthCalcRecordStats.basalMetabolicRate(pesoEnKg, (int) alturaEnCm, genero, edad);
             return (double) bmr;
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,7 +27,7 @@ public class HealthCalcAdapter implements HealthHospital {
         float alturaEnCm = altura * 100; // Convertir metros a centímetros
         
         try {
-            return (int) healthCalc.idealWeight((int) alturaEnCm, genero);
+            return (int) healthCalcRecordStats.idealWeight((int) alturaEnCm, genero);
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

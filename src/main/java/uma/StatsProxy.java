@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StatsDecorator implements HealthCalc, HealthStats {
+public class StatsProxy implements HealthCalc, HealthStats {
     private HealthCalcImpl healthCalc;
     private List<Float> alturas;
     private List<Float> pesos;
@@ -13,8 +13,8 @@ public class StatsDecorator implements HealthCalc, HealthStats {
     private int numHombres;
     private int numMujeres;
 
-    public StatsDecorator(HealthCalcImpl healthCalc) {
-        this.healthCalc = healthCalc;
+    public StatsProxy() {
+        this.healthCalc = HealthCalcImpl.getInstance();
         this.alturas = new ArrayList<>();
         this.pesos = new ArrayList<>();
         this.edades = new ArrayList<>();
@@ -86,13 +86,7 @@ public class StatsDecorator implements HealthCalc, HealthStats {
     }
 
     private float calcularMedia(List<Float> valores) {
-        if (valores.isEmpty()) {
-            return 0;
-        }
-        float suma = 0;
-        for (Float valor : valores) {
-            suma += valor;
-        }
-        return suma / valores.size();
+        return valores.isEmpty() ? 0 : (float) valores.stream().mapToDouble(Float::doubleValue).average().orElse(0.0);
     }
+    
 }
