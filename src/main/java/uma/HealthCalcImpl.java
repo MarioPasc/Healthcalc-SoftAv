@@ -1,7 +1,7 @@
 package uma;
 
 public class HealthCalcImpl implements HealthCalc{
-
+	//
     @Override
     public float idealWeight(int height, char gender) throws Exception {
 
