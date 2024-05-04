@@ -31,5 +31,5 @@ public abstract class MessageHandlerDecorator implements HealthHospital{
         printMessage(weight, height, bmr, unitWeight, unitHeight);
     }
 
-    abstract void printMessage(int weight, float height, double bmr, String unitWeight, String unitHeight);
+    protected abstract void printMessage(int weight, float height, double bmr, String unitWeight, String unitHeight);
 }
