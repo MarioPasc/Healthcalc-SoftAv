@@ -21,11 +21,24 @@ public class MainTestPatterns {
         System.out.println("=======================================");
 
         System.out.println("Ideal Weight:");
-        System.out.println(healthCalcStats.idealWeight(150, 'w'));
+        System.out.println(healthCalcStats.idealWeight(100, 'w'));
         System.out.println(healthCalcStats.idealWeight(150, 'm'));
         System.out.println(healthCalcStats.idealWeight(200, 'w'));
         System.out.println("Hospital Calculations for ideal weight:");
-        System.out.println(adapterHospital.pesoIdeal('w', 150));
+        System.out.println(adapterHospital.pesoIdeal('w', (float)(1.0)));
+
+        System.out.println("=======================================");
+        System.out.println("European Decorator");
+        EuropeanDecorator europeMetricSystemCalc = new EuropeanDecorator(healthCalcStats);
+        // Acepta la altura en metros y el peso en gramos
+        System.out.println("BMR: " + europeMetricSystemCalc.basalMetabolicRate(50*1000, 1, 'w', 50));
+        System.out.println("IW (grams): " + europeMetricSystemCalc.idealWeight(1, 'w'));
+        System.out.println("American Decorator");
+        AmericanDecorator americanMetricSystemCalc = new AmericanDecorator(healthCalcStats);
+        // Acepta la altura en metros y el peso en gramos
+        System.out.println("BMR: " + americanMetricSystemCalc.basalMetabolicRate((float)(110.231), 3, 'w', 50));
+        System.out.println("IW (pounds): " + americanMetricSystemCalc.idealWeight(3, 'w'));
+
         // Imprimimos las estadísticas
         System.out.println("========== Healthcalc Stats ==========");
         System.out.println("Avg BMR:              " + healthCalcStats.bmrMedio());
