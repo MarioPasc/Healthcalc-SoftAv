@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StatsProxy implements HealthCalc, HealthStats {
-    private HealthCalcImpl healthCalc;
+public class StatsProxy implements HealthHospital, HealthStats {
+    private HealthCalcAdapter healthCalc;
     private List<Float> alturas;
     private List<Float> pesos;
     private List<Integer> edades;
@@ -13,8 +13,8 @@ public class StatsProxy implements HealthCalc, HealthStats {
     private int numHombres;
     private int numMujeres;
 
-    public StatsProxy() {
-        this.healthCalc = HealthCalcImpl.getInstance();
+    public StatsProxy(HealthCalcAdapter healthCalcAdapter) {
+        this.healthCalc = healthCalcAdapter;
         this.alturas = new ArrayList<>();
         this.pesos = new ArrayList<>();
         this.edades = new ArrayList<>();
@@ -24,27 +24,27 @@ public class StatsProxy implements HealthCalc, HealthStats {
     }
 
     @Override
-    public float idealWeight(int height, char gender) throws Exception {
-        float idealWeight = healthCalc.idealWeight(height, gender);
+    public int pesoIdeal(char gender, float height) {
+        float idealWeight = healthCalc.pesoIdeal(gender, height);
         alturas.add((float) height);
         if (gender == 'm') {
             numHombres++;
         } else if (gender == 'w') {
             numMujeres++;
         }
-        return idealWeight;
+        return (int)idealWeight;
     }
 
     @Override
-    public float basalMetabolicRate(float weight, int height, char gender, int age) throws Exception {
-        float bmr = healthCalc.basalMetabolicRate(weight, height, gender, age);
-        pesos.add(weight);
-        alturas.add((float) height);
-        edades.add(age);
-        bmrs.add(bmr);
-        if (gender == 'm') {
+    public double bmr(char genero, int edad, float altura, int peso) {
+        double bmr = healthCalc.bmr(genero, edad, altura, peso);
+        pesos.add((float) peso);
+        alturas.add(altura);
+        edades.add(edad);
+        bmrs.add((float) bmr);
+        if (genero == 'm') {
             numHombres++;
-        } else if (gender == 'w') {
+        } else if (genero == 'w') {
             numMujeres++;
         }
         return bmr;

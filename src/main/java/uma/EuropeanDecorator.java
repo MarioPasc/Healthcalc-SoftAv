@@ -7,15 +7,15 @@ public class EuropeanDecorator extends MetricSystemDecorator {
     }
 
     @Override
-    public float idealWeight(int height, char gender) throws Exception {
+    public int pesoIdeal(char gender, float height){
         // Convierte altura de metros a centímetros y calcula el peso ideal, devolviendo el resultado en gramos (!!)
-        return 1000 * super.idealWeight(height * 100, gender);
+        return 1000 * super.pesoIdeal(gender, (float)(height * 100));
     }
 
     @Override
-    public float basalMetabolicRate(float weight, int height, char gender, int age) throws Exception {
+    public double bmr(char gender, int age, float height, int weight){
         // Convierte peso de gramos a kilogramos y altura de metros a centímetros para calcular BMR
-        return super.basalMetabolicRate(weight / 1000, height * 100, gender, age);
+        return super.bmr(gender, age, (float)(height * 100), (int)(weight / 1000));
     }
 }
 

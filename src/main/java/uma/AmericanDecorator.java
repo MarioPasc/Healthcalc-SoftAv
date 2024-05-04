@@ -7,15 +7,15 @@ public class AmericanDecorator extends MetricSystemDecorator{
     }
 
     @Override
-    public float idealWeight(int height, char gender) throws Exception{
+    public int pesoIdeal(char gender, float height){
         // Asume que la altura viene en metros y la convierte a centímetros
-        return super.idealWeight((int)(height * 30.48), gender);
+        return super.pesoIdeal(gender, (int)(height * 30.48));
         }
 
     @Override
-    public float basalMetabolicRate(float weight, int height, char gender, int age) throws Exception{
+    public double bmr(char gender, int age, float height, int weight){
         // Asume que el peso viene en kilogramos y lo convierte a gramos
-        return super.basalMetabolicRate((float)(weight * 453.592), (int)(height * 30.48), gender, age);
+        return super.bmr(gender, age, (float)(height * 30.48), (int)(weight * 453.592));
     }
 }
 

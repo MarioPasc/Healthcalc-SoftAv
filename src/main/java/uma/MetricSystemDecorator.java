@@ -1,6 +1,6 @@
 package uma;
 
-public class MetricSystemDecorator implements HealthCalc{
+public class MetricSystemDecorator implements HealthHospital{
     protected StatsProxy healthCalcStatsProxy;
 
     public MetricSystemDecorator(StatsProxy healthCalcStatsProxy) {
@@ -8,12 +8,11 @@ public class MetricSystemDecorator implements HealthCalc{
     }
 
     @Override
-    public float idealWeight(int height, char gender) throws Exception{
-        return healthCalcStatsProxy.idealWeight(height, gender);
+    public int pesoIdeal(char gender, float height){
+        return healthCalcStatsProxy.pesoIdeal(gender, height);
     }
-
     @Override
-    public float basalMetabolicRate(float weight, int height, char gender, int age) throws Exception{
-        return healthCalcStatsProxy.basalMetabolicRate(weight, height, gender, age);
+    public double bmr(char gender, int age, float height, int weight){
+        return healthCalcStatsProxy.bmr(gender, age, height, weight);
     }
 }
