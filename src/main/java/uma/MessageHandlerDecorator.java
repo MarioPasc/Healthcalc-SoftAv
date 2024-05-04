@@ -1,19 +1,12 @@
 package uma;
 
+import java.util.List;
+
 public abstract class MessageHandlerDecorator implements HealthHospital{
     protected MetricSystemDecorator decoratedCalc;
-    protected String unitWeight;
-    protected String unitHeight;
 
-    public MessageHandlerDecorator(MetricSystemDecorator decoratedCalc, String unitWeight, String unitHeight) {
+    public MessageHandlerDecorator(MetricSystemDecorator decoratedCalc) {
         this.decoratedCalc = decoratedCalc;
-        this.unitWeight = unitWeight;
-        this.unitHeight = unitHeight;
-    }
-
-    public void setUnits(String unitWeight, String unitHeight) {
-        this.unitWeight = unitWeight;
-        this.unitHeight = unitHeight;
     }
 
     public void setCalculator(MetricSystemDecorator decoratedCalc) {
@@ -31,5 +24,12 @@ public abstract class MessageHandlerDecorator implements HealthHospital{
         return bmr;
     }
 
-    protected abstract void displayBMRMessage(int weight, float height, double bmr);
+    protected void displayBMRMessage(int weight, float height, double bmr) {
+        List<String> units = decoratedCalc.getUnits();
+        String unitWeight = units.get(0);
+        String unitHeight = units.get(1);
+        printMessage(weight, height, bmr, unitWeight, unitHeight);
+    }
+
+    abstract void printMessage(int weight, float height, double bmr, String unitWeight, String unitHeight);
 }

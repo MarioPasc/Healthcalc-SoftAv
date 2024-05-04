@@ -4,40 +4,31 @@ public class MainTestPatterns {
     public static void main(String[] args) throws Exception{
         // Creamos una instancia de la calculadora
         HealthCalcImpl.getInstance();
-        // Asociamos un StatsProxy a esta calculadora
-        StatsProxy healthCalcStats = new StatsProxy();
-        // Intentamos realizar algunas operaciones
-        System.out.println("BMR:");
-        System.out.println(healthCalcStats.basalMetabolicRate(50, 100, 'w', 50));
-        System.out.println(healthCalcStats.basalMetabolicRate(70, 130, 'm', 60));
-        System.out.println(healthCalcStats.basalMetabolicRate(100, 150, 'w', 80));
-        // Probamos ahora un cálculo con el hospital
         HealthCalcAdapter adapterHospital = new HealthCalcAdapter();
-        System.out.println("Hospital Calculations for ideal weight:");
-        // Como podemos comprobar, si introducimos la altura en metro y el peso en gramos, nos da el mismo
-        // resultado que la primera entrada de BMR
-        System.out.println(adapterHospital.bmr('w', 50, 1, 50000));
+        // Asociamos un StatsProxy a esta calculadora Hospital
+        StatsProxy healthCalcStats = new StatsProxy(adapterHospital);
+        
+
 
         System.out.println("=======================================");
+        System.out.println("Languages Decorator");
 
-        System.out.println("Ideal Weight:");
-        System.out.println(healthCalcStats.idealWeight(100, 'w'));
-        System.out.println(healthCalcStats.idealWeight(150, 'm'));
-        System.out.println(healthCalcStats.idealWeight(200, 'w'));
-        System.out.println("Hospital Calculations for ideal weight:");
-        System.out.println(adapterHospital.pesoIdeal('w', (float)(1.0)));
-
-        System.out.println("=======================================");
-        System.out.println("European Decorator");
-        EuropeanDecorator europeMetricSystemCalc = new EuropeanDecorator(healthCalcStats);
-        // Acepta la altura en metros y el peso en gramos
-        System.out.println("BMR: " + europeMetricSystemCalc.basalMetabolicRate(50*1000, 1, 'w', 50));
-        System.out.println("IW (grams): " + europeMetricSystemCalc.idealWeight(1, 'w'));
-        System.out.println("American Decorator");
+        // Creas las calculadoras que quieras tener, las asocias a un proxy de estadísticas que está asociado a una HealthCalcImpl
         AmericanDecorator americanMetricSystemCalc = new AmericanDecorator(healthCalcStats);
-        // Acepta la altura en metros y el peso en gramos
-        System.out.println("BMR: " + americanMetricSystemCalc.basalMetabolicRate((float)(110.231), 3, 'w', 50));
-        System.out.println("IW (pounds): " + americanMetricSystemCalc.idealWeight(3, 'w'));
+        EuropeanDecorator europeMetricSystemCalc = new EuropeanDecorator(healthCalcStats);
+        // Creas una clase por cada idioma que se implemente, ajustando las unidades y asociando el tipo de calculadora a cada uno
+        SpanishMessageHandler messageCalcES = new SpanishMessageHandler(americanMetricSystemCalc);
+        EnglishMessageHandler messageCalcEN = new EnglishMessageHandler(americanMetricSystemCalc);
+        // Realizas cálculos
+        System.out.println("## Calculadora Americana ##");
+        messageCalcEN.bmr('w', 50, (float)(3.5), (int)(110.231));
+        messageCalcES.bmr('w', 50, (float)(3.5), (int)(110.231));
+        System.out.println("## Calculadora Europea ##");
+        // Cambias los parámetros de los decoradores para cambiar de calculadora
+        messageCalcES.setCalculator(europeMetricSystemCalc);
+        messageCalcEN.setCalculator(europeMetricSystemCalc);
+        messageCalcEN.bmr('w', 50, 1, 50*1000);
+        messageCalcES.bmr('w', 50, 1, 50*1000);
 
         // Imprimimos las estadísticas
         System.out.println("========== Healthcalc Stats ==========");
