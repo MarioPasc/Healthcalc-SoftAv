@@ -1,7 +1,7 @@
 package uma;
 
 public class HealthCalcAdapter implements HealthHospital {
-    private HealthCalcImpl healthCalcCore;
+    private HealthCalc healthCalcCore;
 
     public HealthCalcAdapter() {
         // No tenemos que pasarle una instancia de la calculadora ya que se ha aplicado Singleton

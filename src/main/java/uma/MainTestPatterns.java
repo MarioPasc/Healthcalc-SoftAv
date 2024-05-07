@@ -7,9 +7,6 @@ public class MainTestPatterns {
         HealthCalcAdapter adapterHospital = new HealthCalcAdapter();
         // Asociamos un StatsProxy a esta calculadora Hospital
         StatsProxy healthCalcStats = new StatsProxy(adapterHospital);
-        
-
-
         System.out.println("=======================================");
         System.out.println("Languages Decorator");
 
