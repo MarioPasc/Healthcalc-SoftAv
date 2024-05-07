@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class StatsProxy implements HealthHospital, HealthStats {
-    private HealthCalcAdapter healthCalc;
+    private HealthHospital healthCalc;
     private List<Float> alturas;
     private List<Float> pesos;
     private List<Integer> edades;
@@ -13,7 +13,7 @@ public class StatsProxy implements HealthHospital, HealthStats {
     private int numHombres;
     private int numMujeres;
 
-    public StatsProxy(HealthCalcAdapter healthCalcAdapter) {
+    public StatsProxy(HealthHospital healthCalcAdapter) {
         this.healthCalc = healthCalcAdapter;
         this.alturas = new ArrayList<>();
         this.pesos = new ArrayList<>();
