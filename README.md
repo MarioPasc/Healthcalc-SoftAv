@@ -16,6 +16,7 @@
 - [Práctica 2: Casos de Uso](#práctica-2-casos-de-uso)
 - [Práctica 3: BDD](#práctica-3-bdd)
 - [Práctica 4: Interfaz Gráfica de Usuario](#práctica-4-interfaz-gráfica-de-usuario)
+- [Práctica 6: Patrones de Diseño](#practica-6-patrones-de-diseño)
 
 </details>
 
@@ -419,6 +420,59 @@ java -jar HealthCalc.jar
 ```
 
 </details>
+
+# Práctica 6: Patrones de Diseño
+
+Con la finalidad de extender las funcionalidades de la calculadora de salud para adaptarse a las peticiones del Hospital 'Costa del Sol', en Marbella, Málaga, siguiendo los principios de diseño SOLID, se han aplicado una serie de patrones de diseño de software.
+
+<details>
+<summary>Patrones Aplicados</summary>
+
+
+<details>
+<summary>Singleton</summary>
+El patrón Singleton se ha usado para asegurar que la clase `HealthCalcImpl` tenga solo una instancia en toda la aplicación y proporcionar un punto de acceso global a esa instancia. El principal objetivo entonces ha sido implementarlo para controlar el acceso a los cálculos de salud. Con `getInstance()`, se garantiza que se utiliza la misma configuración y lógica de cálculo en todo el software, facilitando la gestión y mantenimiento del sistema.
+<p align="center">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/28aa87bf-4561-45b8-a0c8-b9ccba9cf4b7" width="700" title="Singleton">
+</p>
+</details>
+
+<details>
+<summary>Adapter</summary>
+El patrón Adaptador se ha usado para permitir que sistemas con interfaces incompatibles trabajen juntos. La clase `HealthCalcAdapter` actúa como un adaptador entre la interfaz `HealthHospital`, requerida por el Hospital Costa del Sol, y la implementación existente de la calculadora de salud, `HealthCalcImpl`. Dado que `HealthCalcImpl` ya implementa métodos para calcular el peso ideal y la tasa metabólica basal (BMR), pero con diferentes parámetros y tipos de retorno comparados con los esperados por `HealthHospital`, el adaptador `HealthCalcAdapter` traduce las llamadas de la interfaz `HealthHospital` a las operaciones correspondientes de `HealthCalcImpl`. Esto nos permite reutilizar la funcionalidad existente sin necesidad de reescribir o duplicar código, facilitando la integración con el sistema del hospital.
+
+<p align="center">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/1ead3329-f9dd-48bf-9c8f-d2d6736089fe" width="750" title="Adapter">
+</p>
+
+</details>
+
+<details>
+<summary>Proxy de Registro</summary>
+El uso del patrón Proxy de Registro es especialmente útil para cumplir con los requisitos del Hospital Costa del Sol de llevar un registro detallado y obtener estadísticas agregadas sobre los datos de pacientes. Implementado mediante la clase `StatsProxy`, que implementa la interfaz `HealthStats`, actúa como un intermediario entre la interfaz `HealthHospital` y la implementación real de la calculadora de salud (`HealthCalcAdapter`). Cuando se invocan métodos de `HealthHospital` a través de `StatsProxy`, este no solo delega la llamada a `HealthCalcAdapter` para obtener los resultados de cálculos como el peso ideal o el BMR, sino que también registra los datos relevantes (altura, peso, edad, etc.) de cada invocación en estructuras de datos internas. Esto permite a `StatsProxy` acumular información sobre las operaciones realizadas, sin alterar la funcionalidad de la calculadora subyacente.
+
+<p align="center">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/468b09fa-9291-44b2-93f6-67bfd4c1def7" width="800" title="ProxyRegistro">
+</p>
+
+</details>
+
+<details>
+<summary>Decoradores</summary>
+
+En el sistema del Hospital Costa del Sol, se han integrado dos tipos específicos de decoradores:
+
+1. **Decoradores de Unidades (EuropeanDecorator y AmericanDecorator):** Estos decoradores ajustan las entradas y salidas de la calculadora para que se adapten a las unidades métricas o imperiales, respectivamente. El `EuropeanDecorator` convierte las entradas de metros a centímetros y de gramos a kilogramos, mientras que el `AmericanDecorator` convierte las entradas de pies a centímetros y de libras a kilogramos, asegurando que la calculadora subyacente (`HealthCalcImpl`), que opera en centímetros y kilogramos, pueda ser usada sin cambios. Esta faceta es muy importante para un hospital que atiende a una población internacional.
+
+2. **Decoradores de Mensajes (SpanishMessageHandler y EnglishMessageHandler):** Estos decoradores envuelven la calculadora y añaden la capacidad de mostrar mensajes en el idioma deseado. Estos decoradores aseguran que cada vez que se realiza un cálculo, el resultado se comunica de manera clara y en el idioma preferido del usuario. Se ha hecho uso de que cada calculadora tiene guardada internamente las unidades que usa de entrada (`UNITS`) para poder mostrar unidades personalizadas en el mensaje de salida, de esta forma, por ejemplo, si se ha usado la calculadora Americana, se mostrarán los datos de entrada del mensaje en pies y libras, y en el idioma seleccionado por el usuario, o todos.    
+
+</details>
+
+La aplicación de los patrones de diseño Singleton, Adaptador, Proxy y Decorador en el sistema de la calculadora de salud del Hospital Costa del Sol ilustra una integración eficiente que mejora la escalabilidad, flexibilidad y mantenimiento del software.
+
+
+</details>
+
 
 ## Cómo Usar
 
