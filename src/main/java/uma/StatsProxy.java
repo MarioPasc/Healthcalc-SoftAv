@@ -24,10 +24,10 @@ public class StatsProxy implements HealthHospital, HealthStats {
     }
 
     @Override
-    public int pesoIdeal(Gender gender, float height) {
-        float idealWeight = healthCalc.pesoIdeal(gender, height);
-        alturas.add((float) height);
-        switch (gender) {
+    public int pesoIdeal(Person persona) {
+        float idealWeight = healthCalc.pesoIdeal(persona);
+        alturas.add((float) persona.height());
+        switch (persona.gender()) {
             case MALE:
                 numHombres ++;
                 break;
@@ -39,13 +39,13 @@ public class StatsProxy implements HealthHospital, HealthStats {
     }
 
     @Override
-    public double bmr(Gender genero, int edad, float altura, int peso) {
-        double bmr = healthCalc.bmr(genero, edad, altura, peso);
-        pesos.add((float) peso);
-        alturas.add(altura);
-        edades.add(edad);
+    public double bmr(Person persona) {
+        double bmr = healthCalc.bmr(persona);
+        pesos.add((float) persona.weight());
+        alturas.add(persona.height());
+        edades.add(persona.age());
         bmrs.add((float) bmr);
-        switch (genero) {
+        switch (persona.gender()) {
             case MALE:
                 numHombres ++;
                 break;

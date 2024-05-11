@@ -92,5 +92,9 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
     6. Cambios en la clase HealthHospital: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
     7. Cambios en la clase HealthCalcAdapter: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person, 
     para estar acorde con la interfaz HealthHospital.
+    8. Cambios en la clase StatsProxy: 
+        - Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+        - Se han cambiado en todos los métodos el acceso a los parámetros weight, height, age y gender 
+        por el acceso a los métodos getter de la clase Person.
 
 
