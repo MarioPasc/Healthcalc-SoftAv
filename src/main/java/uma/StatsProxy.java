@@ -24,28 +24,34 @@ public class StatsProxy implements HealthHospital, HealthStats {
     }
 
     @Override
-    public int pesoIdeal(char gender, float height) {
+    public int pesoIdeal(Gender gender, float height) {
         float idealWeight = healthCalc.pesoIdeal(gender, height);
         alturas.add((float) height);
-        if (gender == 'm') {
-            numHombres++;
-        } else if (gender == 'w') {
-            numMujeres++;
+        switch (gender) {
+            case MALE:
+                numHombres ++;
+                break;
+            case FEMALE:
+                numMujeres++;
+                break;
         }
         return (int)idealWeight;
     }
 
     @Override
-    public double bmr(char genero, int edad, float altura, int peso) {
+    public double bmr(Gender genero, int edad, float altura, int peso) {
         double bmr = healthCalc.bmr(genero, edad, altura, peso);
         pesos.add((float) peso);
         alturas.add(altura);
         edades.add(edad);
         bmrs.add((float) bmr);
-        if (genero == 'm') {
-            numHombres++;
-        } else if (genero == 'w') {
-            numMujeres++;
+        switch (genero) {
+            case MALE:
+                numHombres ++;
+                break;
+            case FEMALE:
+                numMujeres++;
+                break;
         }
         return bmr;
     }

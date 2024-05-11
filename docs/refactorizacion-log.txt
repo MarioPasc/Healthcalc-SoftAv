@@ -46,6 +46,13 @@ más robusta.
     - Cambio en la implementación específica de HealthHospital, HealthCalcAdapter:
         1. bmr: char genero -> Gender genero
         2. pesoIdeal: char genero -> Gender genero
+    - Cambio en la implementación específica de HealthStats, StatsProxy:
+        1. bmr: 
+            - char genero -> Gender genero
+            - Se ha usado un switch (genero) para sumar las estadísticas del número de hombres y mujeres.
+        2. pesoIdeal: 
+            - char genero -> Gender genero
+            - Se ha usado un switch (genero) para sumar las estadísticas del número de hombres y mujeres.
         
 
 Estos cambios afectarían aproximadamente a 1 enum, 2-3 interfaces/clases, y múltiples líneas 
