@@ -452,10 +452,8 @@ El patrón Adaptador se ha usado para permitir que sistemas con interfaces incom
 El uso del patrón Proxy de Registro es especialmente útil para cumplir con los requisitos del Hospital Costa del Sol de llevar un registro detallado y obtener estadísticas agregadas sobre los datos de pacientes. Implementado mediante la clase `StatsProxy`, que implementa la interfaz `HealthStats`, actúa como un intermediario entre la interfaz `HealthHospital` y la implementación real de la calculadora de salud (`HealthCalcAdapter`). Cuando se invocan métodos de `HealthHospital` a través de `StatsProxy`, este no solo delega la llamada a `HealthCalcAdapter` para obtener los resultados de cálculos como el peso ideal o el BMR, sino que también registra los datos relevantes (altura, peso, edad, etc.) de cada invocación en estructuras de datos internas. Esto permite a `StatsProxy` acumular información sobre las operaciones realizadas, sin alterar la funcionalidad de la calculadora subyacente.
 
 <p align="center">
-  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/468b09fa-9291-44b2-93f6-67bfd4c1def7" width="800" title="ProxyRegistro">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/c275d1f4-04b8-47a8-817b-82213ac12155" width="800" title="ProxyRegistro">
 </p>
-
-</details>
 
 <details>
 <summary>Decoradores</summary>
