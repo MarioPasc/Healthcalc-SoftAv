@@ -18,23 +18,23 @@ public class MainTestPatterns {
         EnglishMessageHandler messageCalcEN = new EnglishMessageHandler(americanMetricSystemCalc);
         // Realizas cálculos
         System.out.println("## Calculadora Americana ##");
-        messageCalcEN.bmr('w', 50, (float)(3.5), (int)(110.231));
+        messageCalcEN.bmr('m', 50, (float)(3.5), (int)(110.231));
         messageCalcES.bmr('w', 50, (float)(3.5), (int)(110.231));
         System.out.println("## Calculadora Europea ##");
         // Cambias los parámetros de los decoradores para cambiar de calculadora
         messageCalcES.setCalculator(europeMetricSystemCalc);
         messageCalcEN.setCalculator(europeMetricSystemCalc);
-        messageCalcEN.bmr('w', 50, 1, 50*1000);
+        messageCalcEN.bmr('m', 50, 1, 50*1000);
         messageCalcES.bmr('w', 50, 1, 50*1000);
 
         // Imprimimos las estadísticas
         System.out.println("========== Healthcalc Stats ==========");
-        System.out.println("Avg BMR:              " + healthCalcStats.bmrMedio());
-        System.out.println("Avg Weight:           " + healthCalcStats.pesoMedio());
-        System.out.println("Avg Age:              " + healthCalcStats.edadMedia());
-        System.out.println("Avg Height:           " + healthCalcStats.alturaMedia());
-        System.out.println("Avg Males:            " + healthCalcStats.numSexoH());
-        System.out.println("Avg Females:          " + healthCalcStats.numSexoM());
-        System.out.println("Avg Patients:         " + healthCalcStats.numTotalPacientes());
+        System.out.println("Avg BMR:              " + healthCalcStats.bmrMedio() + " kcal/dia");
+        System.out.println("Avg Weight:           " + healthCalcStats.pesoMedio()+ " gramos" );
+        System.out.println("Avg Age:              " + healthCalcStats.edadMedia()+ " años");
+        System.out.println("Avg Height:           " + healthCalcStats.alturaMedia()+" m");
+        System.out.println("Avg Males:            " + healthCalcStats.numSexoH()+   " hombres");
+        System.out.println("Avg Females:          " + healthCalcStats.numSexoM()+   " mujeres");
+        System.out.println("Avg Patients:         " + healthCalcStats.numTotalPacientes()+ " pacientes");
     }
 }

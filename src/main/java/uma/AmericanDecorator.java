@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class AmericanDecorator extends MetricSystemDecorator{
-    public static final List<String> UNITS = Arrays.asList("libras", "pies");    
+    public static final List<String> UNITS = Arrays.asList("pounds", "feet");    
 
     public AmericanDecorator(StatsProxy healthCalcStatsProxy) {
         super(healthCalcStatsProxy);
@@ -12,14 +12,15 @@ public class AmericanDecorator extends MetricSystemDecorator{
 
     @Override
     public int pesoIdeal(char gender, float height){
-        // Asume que la altura viene en metros y la convierte a centímetros
-        return super.pesoIdeal(gender, (int)(height * 30.48));
+        // La altura viene en pies, hay que pasarla a metros
+        return super.pesoIdeal(gender, (int)(height * 0.3048));
         }
 
     @Override
     public double bmr(char gender, int age, float height, int weight){
-        // Asume que el peso viene en kilogramos y lo convierte a gramos
-        return super.bmr(gender, age, (float)(height * 30.48), (int)(weight * 453.592));
+        // EL peso viene en libras, hay que pasarlo a gramos
+        // La altura viene en pies, hay que pasarla a metros
+        return super.bmr(gender, age, (float)(height * 0.3048), (int)(weight * 453.592));
     }
 
     public List<String> getUnits() {
