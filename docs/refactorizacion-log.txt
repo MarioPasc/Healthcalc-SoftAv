@@ -89,5 +89,8 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
         - Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
     5. Cambios en los test unitarios: Debido a que ahora la comporbación de parámetros se realiza en la clase PersonaEspecifica,
     que implementa la interfaz Person, se han mantenido el mismo número de test, pero se ha esperado una excepción de Person. 
+    6. Cambios en la clase HealthHospital: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+    7. Cambios en la clase HealthCalcAdapter: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person, 
+    para estar acorde con la interfaz HealthHospital.
 
 

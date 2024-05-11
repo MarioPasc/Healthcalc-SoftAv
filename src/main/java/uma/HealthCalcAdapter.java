@@ -9,12 +9,12 @@ public class HealthCalcAdapter implements HealthHospital {
     }
 
     @Override
-    public double bmr(Gender genero, int edad, float altura, int peso) {
-        float alturaEnCm = altura * 100; // Convertir metros a centímetros
-        float pesoEnKg = peso / 1000.0f; // Convertir gramos a kilogramos
-        
+    public double bmr(Person persona) {
+        float alturaEnCm = persona.height() * 100; // Convertir metros a centímetros
+        float pesoEnKg = persona.weight() / 1000.0f; // Convertir gramos a kilogramos
+        Person personaEspecifica = new PersonaEspecifica(pesoEnKg, (int) alturaEnCm, persona.age(), persona.gender());
         try {
-            float bmr = healthCalcCore.basalMetabolicRate(pesoEnKg, (int) alturaEnCm, genero, edad);
+            float bmr = healthCalcCore.basalMetabolicRate(personaEspecifica);
             return (double) bmr;
         } catch (Exception e) {
             e.printStackTrace();
@@ -23,11 +23,11 @@ public class HealthCalcAdapter implements HealthHospital {
     }
 
     @Override
-    public int pesoIdeal(Gender genero, float altura) {
-        float alturaEnCm = altura * 100; // Convertir metros a centímetros
-        
+    public int pesoIdeal(Person persona) {
+        float alturaEnCm = persona.height() * 100; // Convertir metros a centímetros
+        Person personaEspecifica = new PersonaEspecifica(persona.weight(), (int) alturaEnCm, persona.age(), persona.gender());
         try {
-            return (int) healthCalcCore.idealWeight((int) alturaEnCm, genero);
+            return (int) healthCalcCore.idealWeight(personaEspecifica);
         } catch (Exception e) {
             e.printStackTrace();
             return 0;
