@@ -14,7 +14,10 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public float idealWeight(int height, Gender gender) throws Exception {        
+    public float idealWeight(Person persona) throws Exception {        
+        // Obtenemos los datos de la persona:
+        float height = persona.height();
+        Gender gender = persona.gender();
         // Calculamos el peso ideal:
         switch (gender) {
             case MALE:
@@ -35,7 +38,12 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public float basalMetabolicRate(float weight, int height, Gender gender, int age) throws Exception {       
+    public float basalMetabolicRate(Person person) throws Exception {  
+        // Obtenemos los datos de la persona:
+        float weight = person.weight();
+        float height = person.height();
+        int age = person.age();
+        Gender gender = person.gender();
         // Calculamos la tasa metabólica basal:
         switch (gender) {
             case MALE:
@@ -55,3 +63,5 @@ public class HealthCalcImpl implements HealthCalc {
         }
     }
 }
+
+

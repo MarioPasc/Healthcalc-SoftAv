@@ -83,9 +83,10 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
     2. Creación de la clase PersonaEspecifica, que implementa la interfaz Person.
         - Implementación específica a los métodos de la interfaz Person.
         - Implementación de control de parámetros de entrada de la clase HealthCalcImpl en el contructor de PersonaEspecifica. 
-    3. Cambio en la interfaz HealthCalc:
+    3. Cambio en la interfaz HealthCalc: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
     4. Cambio en la clase específica HealthCalcImpl:
         - Se ha eliminado el control de parámetros de entrada erróneos en los métodos basalMetabolicRate e idealWeight.
+        - Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
 
 
 
