@@ -9,7 +9,6 @@ public class MainTestPatterns {
         StatsProxy healthCalcStats = new StatsProxy(adapterHospital);
         System.out.println("=======================================");
         System.out.println("Languages Decorator");
-
         // Creas las calculadoras que quieras tener, las asocias a un proxy de estadísticas que está asociado a una HealthCalcImpl
         AmericanDecorator americanMetricSystemCalc = new AmericanDecorator(healthCalcStats);
         EuropeanDecorator europeMetricSystemCalc = new EuropeanDecorator(healthCalcStats);
@@ -19,14 +18,13 @@ public class MainTestPatterns {
         // Realizas cálculos
         System.out.println("## Calculadora Americana ##");
         messageCalcEN.bmr(Gender.FEMALE, 50, (float)(3.5), (int)(110.231));
-        messageCalcES.bmr(Gender.FEMALE, 50, (float)(3.5), (int)(110.231));
+        messageCalcES.bmr(Gender.MALE, 50, (float)(3.5), (int)(110.231));
         System.out.println("## Calculadora Europea ##");
         // Cambias los parámetros de los decoradores para cambiar de calculadora
         messageCalcES.setCalculator(europeMetricSystemCalc);
         messageCalcEN.setCalculator(europeMetricSystemCalc);
         messageCalcEN.bmr(Gender.FEMALE, 50, 1, 50*1000);
-        messageCalcES.bmr(Gender.FEMALE, 50, 1, 50*1000);
-
+        messageCalcES.bmr(Gender.MALE, 50, 1, 50*1000);
         // Imprimimos las estadísticas
         System.out.println("========== Healthcalc Stats ==========");
         System.out.println("Avg BMR:              " + healthCalcStats.bmrMedio());

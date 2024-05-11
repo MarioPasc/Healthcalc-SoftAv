@@ -246,6 +246,13 @@ public class HealthCalcVista {
                 "Ingrese números válidos para la altura y género",
                 JOptionPane.ERROR_MESSAGE);
 	}
+
+	public void noInputGender() {
+		JOptionPane.showMessageDialog(frame,
+				"Seleccione un género",
+                "Parámetros de entrada inválidos.",
+                JOptionPane.ERROR_MESSAGE);
+	}
 	
 	public void invalidInputsBMR(String errCode) {
 		JOptionPane.showMessageDialog(frame,

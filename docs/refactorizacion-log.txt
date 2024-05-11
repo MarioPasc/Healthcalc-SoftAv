@@ -34,8 +34,10 @@ más robusta.
     con el enumerado uma.Gender:
         1. Se ha importado uma.Gender
         2. 'char' -> Gender 
-        1. 'm' -> Gender.MALE
-        2. 'w' -> Gender.FEMALE
+        3. 'm' -> Gender.MALE
+        4. 'w' -> Gender.FEMALE
+        5. Se ha creado un nuevo mensaje de error para el caso de que el usuario no seleccione un
+        género e intente calcular el BMR o peso ideal. 
     - Cambio en la implementación específica de HealthStats, StatsProxy:
         1. bmr: 
             - char genero -> Gender genero
