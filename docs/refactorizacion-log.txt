@@ -40,6 +40,12 @@ más robusta.
     con el enumerado uma.Gender:
         1. 'm' -> Gender.MALE
         2. 'w' -> Gender.FEMALE
+    - Cambio en la interfaz HealthHospital: Se ha cambiado el dato de entrada a Gender. 
+        1. bmr: char gender -> Gender gender
+        2. pesoIdeal: char gender -> Gender gender
+    - Cambio en la implementación específica de HealthHospital, HealthCalcAdapter:
+        1. bmr: char genero -> Gender genero
+        2. pesoIdeal: char genero -> Gender genero
         
 
 Estos cambios afectarían aproximadamente a 1 enum, 2-3 interfaces/clases, y múltiples líneas 

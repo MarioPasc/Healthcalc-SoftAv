@@ -9,7 +9,7 @@ public class HealthCalcAdapter implements HealthHospital {
     }
 
     @Override
-    public double bmr(char genero, int edad, float altura, int peso) {
+    public double bmr(Gender genero, int edad, float altura, int peso) {
         float alturaEnCm = altura * 100; // Convertir metros a centímetros
         float pesoEnKg = peso / 1000.0f; // Convertir gramos a kilogramos
         
@@ -23,7 +23,7 @@ public class HealthCalcAdapter implements HealthHospital {
     }
 
     @Override
-    public int pesoIdeal(char genero, float altura) {
+    public int pesoIdeal(Gender genero, float altura) {
         float alturaEnCm = altura * 100; // Convertir metros a centímetros
         
         try {
