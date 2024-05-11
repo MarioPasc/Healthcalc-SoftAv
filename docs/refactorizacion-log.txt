@@ -9,7 +9,7 @@ Este olor se manifiesta cuando hay operaciones que dependen de un tipo de datos 
 como en este caso, los caracteres que representan género ('m' o 'w'), que requieren 
 verificaciones de tipo repetitivas y propensas a errores en el código.
 
-- Tipo de Refactoring: 
+- Tipo de Refactoring: El refactoring aplicado es Replace Type Code with Class.
 
 - Categoría del Refactoring: Este cambio es un Attribute Refactoring ya que modifica la forma 
 en que se maneja un atributo de la entidad, transformando un tipo de dato primitivo en una 
@@ -24,28 +24,18 @@ más robusta.
 
 - Registro de cambios manuales: Para este cambio, los cambios manuales incluyeron:
     - Creación del enum Gender.
-    - Cambio en la interfaz HealthCalc: char gender -> Gender gender
     - Cambio en la implementación específica HealthCalcImpl:
         1. char gender -> Gender gender
         2. Cambio del uso de "if" a usar "switch" ya que ahora tenemos un caso "default":
             1. if (gender == 'm') -> case MALE:
             2. else if (gender == 'w') -> case FEMALE:
             3. default -> case DEFAULT: throw new IllegalArgumentException
-    - Cambio en las pruebas unitarias: Se ha usado una herramienta de reemplazado de texto
-    para cambiar las siguientes instancias:
-        1. 'm' -> Gender.MALE
-        2. 'w' -> Gender.FEMALE
-        3. 'x' -> null
     - Cambio en el Controlador del Modelo Vista-Controlador: Se ha cambiado para que trabaje
     con el enumerado uma.Gender:
+        1. Se ha importado uma.Gender
+        2. 'char' -> Gender 
         1. 'm' -> Gender.MALE
         2. 'w' -> Gender.FEMALE
-    - Cambio en la interfaz HealthHospital: Se ha cambiado el dato de entrada a Gender. 
-        1. bmr: char gender -> Gender gender
-        2. pesoIdeal: char gender -> Gender gender
-    - Cambio en la implementación específica de HealthHospital, HealthCalcAdapter:
-        1. bmr: char genero -> Gender genero
-        2. pesoIdeal: char genero -> Gender genero
     - Cambio en la implementación específica de HealthStats, StatsProxy:
         1. bmr: 
             - char genero -> Gender genero
@@ -53,7 +43,21 @@ más robusta.
         2. pesoIdeal: 
             - char genero -> Gender genero
             - Se ha usado un switch (genero) para sumar las estadísticas del número de hombres y mujeres.
-        
 
-Estos cambios afectarían aproximadamente a 1 enum, 2-3 interfaces/clases, y múltiples líneas 
-de código en cada lugar donde el género es utilizado o comprobado.
+(EXTRA) Cambios con herramientas automáticas:
+    - Cambio en la interfaz HealthCalc: char gender -> Gender gender
+    - Cambio en las pruebas unitarias: Se ha usado una herramienta de reemplazado de texto
+    para cambiar las siguientes instancias:
+        1. 'm' -> Gender.MALE
+        2. 'w' -> Gender.FEMALE
+        3. 'x' -> null
+    - Cambio en los decoradores MetricSystemDecorator y MessageHandlerDecorador usando una herramienta de
+    reemplazado de texto automática: char genero -> Gender genero
+    - Cambio en la interfaz HealthHospital: Se ha cambiado el dato de entrada a Gender. 
+        1. bmr: char gender -> Gender gender
+        2. pesoIdeal: char gender -> Gender gender
+    - Cambio en la implementación específica de HealthHospital, HealthCalcAdapter:
+        1. bmr: char genero -> Gender genero
+        2. pesoIdeal: char genero -> Gender genero
+
+

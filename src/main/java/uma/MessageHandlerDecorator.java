@@ -14,11 +14,11 @@ public abstract class MessageHandlerDecorator implements HealthHospital{
     }
 
     @Override
-    public int pesoIdeal(char gender, float height){
+    public int pesoIdeal(Gender gender, float height){
         return decoratedCalc.pesoIdeal(gender, height);
     }
     @Override
-    public double bmr(char gender, int age, float height, int weight){
+    public double bmr(Gender gender, int age, float height, int weight){
         double bmr = decoratedCalc.bmr(gender, age, height, weight);
         displayBMRMessage(weight, height, bmr);
         return bmr;
