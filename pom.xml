@@ -38,5 +38,10 @@
             <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.miglayout</groupId>
+            <artifactId>miglayout-swing</artifactId>
+            <version>5.2</version>  <!-- Cambia la versión según sea necesario -->
+        </dependency>
     </dependencies>
 </project>
