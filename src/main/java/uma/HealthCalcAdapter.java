@@ -25,7 +25,7 @@ public class HealthCalcAdapter implements HealthHospital {
     @Override
     public int pesoIdeal(Person persona) {
         float alturaEnCm = persona.height() * 100; // Convertir metros a centímetros
-        Person personaEspecifica = new PersonaEspecifica(persona.weight(), (int) alturaEnCm, persona.age(), persona.gender());
+        Person personaEspecifica = new PersonaEspecifica((int) alturaEnCm, persona.gender());
         try {
             return (int)(1000*healthCalcCore.idealWeight(personaEspecifica));
         } catch (Exception e) {

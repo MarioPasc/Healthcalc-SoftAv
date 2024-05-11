@@ -15,7 +15,7 @@ public class EuropeanDecorator extends MetricSystemDecorator {
     @Override
     public int pesoIdeal(Person persona){
         // Debido a que la interfaz HealthHospital ya trabaja en gramos y metros, no hay que hacer ningun cambio
-        Person personaEuropeo = new PersonaEspecifica(persona.weight(), persona.height(), persona.age(), persona.gender());
+        Person personaEuropeo = new PersonaEspecifica(persona.height(), persona.gender());
         return super.pesoIdeal(personaEuropeo);
     }
 

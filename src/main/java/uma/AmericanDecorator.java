@@ -13,7 +13,7 @@ public class AmericanDecorator extends MetricSystemDecorator{
     @Override
     public int pesoIdeal(Person persona){
         // La altura viene en pies, la convertimos a metros, que es con lo que trabaja HealthHospital
-        Person personaAmericano = new PersonaEspecifica(persona.weight(), (float)(persona.height()*0.3048), persona.age(), persona.gender());
+        Person personaAmericano = new PersonaEspecifica((float)(persona.height()*0.3048), persona.gender());
         return super.pesoIdeal(personaAmericano);
         }
 

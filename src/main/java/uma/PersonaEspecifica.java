@@ -35,6 +35,17 @@ public class PersonaEspecifica implements Person {
         this.gender = gender;
     }
 
+    public PersonaEspecifica(float height, Gender gender) {
+        if (height <= 0 || height >= Integer.MAX_VALUE) {
+            throw new IllegalArgumentException("La altura debe ser un valor positivo y razonable.");
+        }
+        if (gender == null) {
+            throw new NullPointerException("Género no reconocido.");
+        }
+        this.gender = gender;
+        this.height = height;
+    }
+
     /**
      * Retorna el peso de la persona en kilogramos.
      * 
