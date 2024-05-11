@@ -31,7 +31,16 @@ más robusta.
             1. if (gender == 'm') -> case MALE:
             2. else if (gender == 'w') -> case FEMALE:
             3. default -> case DEFAULT: throw new IllegalArgumentException
-        3. Cambio en las pruebas unitarias:
+    - Cambio en las pruebas unitarias: Se ha usado una herramienta de reemplazado de texto
+    para cambiar las siguientes instancias:
+        1. 'm' -> Gender.MALE
+        2. 'w' -> Gender.FEMALE
+        3. 'x' -> null
+    - Cambio en el Controlador del Modelo Vista-Controlador: Se ha cambiado para que trabaje
+    con el enumerado uma.Gender:
+        1. 'm' -> Gender.MALE
+        2. 'w' -> Gender.FEMALE
+        
 
 Estos cambios afectarían aproximadamente a 1 enum, 2-3 interfaces/clases, y múltiples líneas 
 de código en cada lugar donde el género es utilizado o comprobado.

@@ -3,12 +3,14 @@ package uma.GUI;
 import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
+
+import uma.Gender;
 import uma.HealthCalcImpl;
 
 
 public class Controlador implements ActionListener{
 
-	private char gender = 'x';
+	private Gender gender = null;
 	private int height = 0;
 	private int age = 0;
 	private float weight = 0;
@@ -30,12 +32,12 @@ public class Controlador implements ActionListener{
 			case "maleButton":
 				vista.getMaleButton().setBackground(new Color(244, 182, 194));
 				vista.getFemaleButton().setBackground(Color.WHITE);
-				gender = 'm';
+				gender = Gender.MALE;
 				break;
 			case "femaleButton":
 				vista.getFemaleButton().setBackground(new Color(244, 182, 194));
 				vista.getMaleButton().setBackground(Color.WHITE);
-				gender = 'w';
+				gender = Gender.FEMALE;
 				break;
 			case "getBMR":
 				try {
