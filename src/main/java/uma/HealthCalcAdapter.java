@@ -27,7 +27,7 @@ public class HealthCalcAdapter implements HealthHospital {
         float alturaEnCm = persona.height() * 100; // Convertir metros a centímetros
         Person personaEspecifica = new PersonaEspecifica(persona.weight(), (int) alturaEnCm, persona.age(), persona.gender());
         try {
-            return (int) healthCalcCore.idealWeight(personaEspecifica);
+            return (int)(1000*healthCalcCore.idealWeight(personaEspecifica));
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

@@ -92,7 +92,16 @@ public class StatsProxy implements HealthHospital, HealthStats {
     }
 
     private float calcularMedia(List<Float> valores) {
-        return valores.isEmpty() ? 0 : (float) valores.stream().mapToDouble(Float::doubleValue).average().orElse(0.0);
+        if (valores == null || valores.isEmpty()) {
+            return 0;
+        }
+        
+        float suma = 0;
+        for (float valor : valores) {
+            suma += valor;
+        }
+        
+        return suma / valores.size();
     }
     
 }

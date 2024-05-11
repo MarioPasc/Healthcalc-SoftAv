@@ -96,5 +96,11 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
         - Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
         - Se han cambiado en todos los métodos el acceso a los parámetros weight, height, age y gender 
         por el acceso a los métodos getter de la clase Person.
+    9. Cambios en los decoradores:
+        1. MetricSystemDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. El cambio se
+        ha transmitido a todas las clases que extienden MetricSystemDecorator.
+        2. MessageHandlerDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. EL cambio se
+        ha transmitido a todas las clases que extienden MessageHandlerDecorator.
+            
 
 

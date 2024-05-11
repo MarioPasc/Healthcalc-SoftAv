@@ -13,15 +13,16 @@ public class EuropeanDecorator extends MetricSystemDecorator {
     }
 
     @Override
-    public int pesoIdeal(Gender gender, float height){
-        // Convierte altura de metros a centímetros y calcula el peso ideal, devolviendo el resultado en gramos (!!)
-        return 1000 * super.pesoIdeal(gender, (float)(height * 100));
+    public int pesoIdeal(Person persona){
+        // Debido a que la interfaz HealthHospital ya trabaja en gramos y metros, no hay que hacer ningun cambio
+        Person personaEuropeo = new PersonaEspecifica(persona.weight(), persona.height(), persona.age(), persona.gender());
+        return super.pesoIdeal(personaEuropeo);
     }
 
     @Override
-    public double bmr(Gender gender, int age, float height, int weight){
-        // Convierte peso de gramos a kilogramos y altura de metros a centímetros para calcular BMR
-        return super.bmr(gender, age, (float)(height * 100), (int)(weight / 1000));
+    public double bmr(Person persona){
+        Person personaEuropeo = new PersonaEspecifica(persona.weight(), persona.height(), persona.age(), persona.gender());
+        return super.bmr(personaEuropeo);
     }
 
     public List<String> getUnits() {

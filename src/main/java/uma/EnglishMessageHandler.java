@@ -6,7 +6,7 @@ public class EnglishMessageHandler extends MessageHandlerDecorator {
     }
 
     @Override
-    protected void printMessage(int weight, float height, double bmr, String unitWeight, String unitHeight) {
-        System.out.printf("The person with height %.2f %s and weight %d %s has a BMR of %.2f.\n", height, unitHeight, weight, unitWeight, bmr);
+    protected void printMessage(Person persona, double bmr, String unitWeight, String unitHeight) {
+        System.out.printf("The person with height %.2f %s and weight %.2f %s has a BMR of %.2f.\n", persona.height(), unitHeight, persona.weight(), unitWeight, bmr);
     }
 }
