@@ -104,5 +104,19 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
         ha transmitido a todas las clases que extienden MessageHandlerDecorator.
     10. Cambios en el Modelo Vista Controlador: Ahora peso ideal y BMR crean un objeto tipo Person para realizar los cálculos. 
             
+3. Creación de las interfaces CardiovascularMetrics y MetabolicMetrics
 
+- Bad Smell: El principal problema aquí sería Large/God Class, donde una clase tiene demasiadas responsabilidades, abarcando múltiples 
+aspectos de la funcionalidad del sistema que deberían estar separados en módulos más cohesivos y especializados.
 
+- Tipo de Refactoring: El refactoring aplicado sería Extract Interface. Este refactoring implica la creación de interfaces específicas 
+que definen contratos claros para los servicios relacionados con las métricas cardiovasculares y metabólicas. 
+
+- Categoría del Refactoring: Este cambio es un Class Refactoring ya que se extráen interfaces concretas de una interfaz más grande. 
+
+- Descripción: Se han creado las interfaces CardiovascularMetrics y MetabolicMetrics para separar claramente las funcionalidades de 
+cálculo del peso ideal y la tasa metabólica basal, respectivamente. 
+
+- Registro de cambios manuales: Para este cambio, los cambios manuales incluyeron:
+    1. Creación de la interfaz CardiovascularMetrics.
+    2. Creación de la interface MetabolicMetrics.
