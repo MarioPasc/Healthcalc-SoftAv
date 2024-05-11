@@ -1,0 +1,37 @@
+=========================================================
+Registro de la Refactorización al Código de la Aplicación
+=========================================================
+
+1. Sustiución del tipo 'char' para Género por un 'ENUM'
+
+- Bad Smell: El problema que resuelve este refactoring es principalmente Type Tests. 
+Este olor se manifiesta cuando hay operaciones que dependen de un tipo de datos específico, 
+como en este caso, los caracteres que representan género ('m' o 'w'), que requieren 
+verificaciones de tipo repetitivas y propensas a errores en el código.
+
+- Tipo de Refactoring: 
+
+- Categoría del Refactoring: Este cambio es un Attribute Refactoring ya que modifica la forma 
+en que se maneja un atributo de la entidad, transformando un tipo de dato primitivo en una 
+clase con mayor funcionalidad.
+
+- Descripción: Se ha reemplazado el uso de caracteres para representar el género ('m', 'w') 
+por una Enumeración Gender con dos estados posibles: FEMALE y MALE. Este cambio elimina la 
+necesidad de realizar comprobaciones de tipo y comparaciones de caracteres a lo largo del código, 
+centralizando la lógica de género en una única estructura de datos y permitiendo el uso de 
+características orientadas a objetos para manejar diferencias basadas en el género de manera 
+más robusta.
+
+- Registro de cambios manuales: Para este cambio, los cambios manuales incluyeron:
+    - Creación del enum Gender.
+    - Cambio en la interfaz HealthCalc: char gender -> Gender gender
+    - Cambio en la implementación específica HealthCalcImpl:
+        1. char gender -> Gender gender
+        2. Cambio del uso de "if" a usar "switch" ya que ahora tenemos un caso "default":
+            1. if (gender == 'm') -> case MALE:
+            2. else if (gender == 'w') -> case FEMALE:
+            3. default -> case DEFAULT: throw new IllegalArgumentException
+        3. Cambio en las pruebas unitarias:
+
+Estos cambios afectarían aproximadamente a 1 enum, 2-3 interfaces/clases, y múltiples líneas 
+de código en cada lugar donde el género es utilizado o comprobado.
