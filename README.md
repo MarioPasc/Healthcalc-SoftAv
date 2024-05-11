@@ -466,6 +466,9 @@ En el sistema del Hospital Costa del Sol, se han integrado dos tipos específico
 
 2. **Decoradores de Mensajes (SpanishMessageHandler y EnglishMessageHandler):** Estos decoradores envuelven la calculadora y añaden la capacidad de mostrar mensajes en el idioma deseado. Estos decoradores aseguran que cada vez que se realiza un cálculo, el resultado se comunica de manera clara y en el idioma preferido del usuario. Se ha hecho uso de que cada calculadora tiene guardada internamente las unidades que usa de entrada (`UNITS`) para poder mostrar unidades personalizadas en el mensaje de salida, de esta forma, por ejemplo, si se ha usado la calculadora Americana, se mostrarán los datos de entrada del mensaje en pies y libras, y en el idioma seleccionado por el usuario, o todos.    
 
+<p align="center">
+  <img src="https://github.com/MarioPasc/Healthcalc-SoftAv/assets/120520768/62e4569d-b61b-4e88-bb84-3988c78d7e71" width="800" title="Decorator">
+</p>
 </details>
 
 La aplicación de los patrones de diseño Singleton, Adaptador, Proxy y Decorador en el sistema de la calculadora de salud del Hospital Costa del Sol ilustra una integración eficiente que mejora la escalabilidad, flexibilidad y mantenimiento del software.
