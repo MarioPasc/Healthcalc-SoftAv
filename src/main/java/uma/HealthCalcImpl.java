@@ -40,7 +40,7 @@ public class HealthCalcImpl implements HealthCalc {
                     throw new IllegalArgumentException("El peso ideal es cero o menor que cero.");
                 }
             default:
-                throw new IllegalArgumentException("Género no reconocido.");
+                throw new NullPointerException("Género no reconocido.");
         }
     }
 
@@ -60,11 +60,21 @@ public class HealthCalcImpl implements HealthCalc {
         // Calculamos la tasa metabólica basal:
         switch (gender) {
             case MALE:
-                return 10 * weight + 6.25f * height - 5 * age + 5;
+                float resultadoBMRHombre = 10 * weight + 6.25f * height - 5 * age + 5;
+                if (resultadoBMRHombre > 0) {
+                    return resultadoBMRHombre;
+                } else {
+                    throw new IllegalArgumentException("El metabolismo basal es cero o menor que cero.");
+                }
             case FEMALE:
-                return 10 * weight + 6.25f * height - 5 * age - 161;
+                float resultadoBMRMujer = 10 * weight + 6.25f * height - 5 * age - 161;
+                if (resultadoBMRMujer > 0) {
+                    return resultadoBMRMujer;
+                } else {
+                    throw new IllegalArgumentException("El metabolismo basal es cero o menor que cero.");
+                }
             default:
-                throw new IllegalArgumentException("Género no reconocido.");
+                throw new NullPointerException("Género no reconocido.");
         }
     }
 }

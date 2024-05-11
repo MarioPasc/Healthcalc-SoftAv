@@ -58,9 +58,9 @@ public class HealthCalcTest {
     @Test
     @DisplayName("Test género no válido para idealWeight")
     public void testGeneroNoValidoIdealWeight() {
-        assertThrows(IllegalArgumentException.class, 
+        assertThrows(NullPointerException.class, 
         () -> healthCalc.idealWeight(100, null), 
-        "El género debe ser reconocido.");
+        "Género no reconocido.");
     }
 
     // TESTS CAJA BLANCA - Funcionamiento esperado interno del método idealWeight
@@ -146,7 +146,7 @@ public class HealthCalcTest {
 	@DisplayName("Test peso ideal negativo para hombre -valor de salida")
 	public void testbasalMetabolicRateNegativoMujer() {
 		assertThrows(IllegalArgumentException.class, 
-		() -> healthCalc.basalMetabolicRate(1, 1, Gender.FEMALE, 50), 
+		() -> healthCalc.basalMetabolicRate(1, 1, Gender.MALE, 50), 
 		"El metabolismo basal es cero o menor que cero.");
 	}
 
@@ -181,9 +181,9 @@ public class HealthCalcTest {
 	@Test
 	@DisplayName("Test género no válido para basalMetabolicRate")
 	public void testGeneroNoValidoBasalMetabolicRate() {
-		assertThrows(IllegalArgumentException.class, 
+		assertThrows(NullPointerException.class, 
 		() -> healthCalc.basalMetabolicRate(60, 170, null, 17), 
-		"El género debe ser 'm' (hombre) o 'w' (mujer).");
+		"Género no reconocido.");
 	}
 
 	// TESTS CAJA BLANCA - Funcionamiento esperado interno del método basalMetabolicRate
@@ -199,7 +199,7 @@ public class HealthCalcTest {
     }
 
 	@Test
-    @DisplayName("Test metabolismo basal mujer ")
+    @DisplayName("Test metabolismo basal hombre ")
     public void testMetabolismoBasalHombre() throws Exception {
         int height = 180;
 		float weight = 60;
