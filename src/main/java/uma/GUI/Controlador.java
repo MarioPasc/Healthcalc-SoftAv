@@ -5,15 +5,17 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 
 import uma.Gender;
+import uma.Person;
 import uma.HealthCalcImpl;
+import uma.PersonaEspecifica;
 
 
 public class Controlador implements ActionListener{
 
 	private Gender gender = null;
-	private int height = 0;
-	private int age = 0;
-	private float weight = 0;
+	private int height = 1;
+	private int age = 1;
+	private float weight = 1;
 	private HealthCalcImpl calculadora = HealthCalcImpl.getInstance();
 	private HealthCalcVista vista;
 	
@@ -46,7 +48,8 @@ public class Controlador implements ActionListener{
 					age = (Integer) vista.getAgeValue().getValue();
 					
 					try {
-						float bmr = this.calculadora.basalMetabolicRate(weight, height, gender, age);
+						Person persona = new PersonaEspecifica(weight, height, age, gender);
+						float bmr = this.calculadora.basalMetabolicRate(persona);
 			            vista.setBMRResults(bmr);
 					} catch (NullPointerException e1) {
 						vista.noInputGender();
@@ -62,7 +65,8 @@ public class Controlador implements ActionListener{
 					height = Integer.parseInt(vista.getHeightValue().getText());
 					
 					try {
-						float idealWeight = this.calculadora.idealWeight(height, gender);
+						Person persona = new PersonaEspecifica(height, gender);
+						float idealWeight = this.calculadora.idealWeight(persona);
 			            vista.setIdealWResults(idealWeight);
 					} catch (NullPointerException e1) {
 						vista.noInputGender();
