@@ -63,3 +63,29 @@ más robusta.
         2. pesoIdeal: char genero -> Gender genero
 
 
+2. Sustitución de los atributos individuales 'height, weight, age y gender' por una clase que los contenga, Person
+
+- Bad Smell: El problema que resuelve este refactoring es Data Clumbs. 
+Los mismos datos (como peso, altura, edad, género) se pasan juntos en varias funciones o clases, agruparlos en una 
+sola clase (Person) reduce la repetición y mejora la cohesión.
+
+- Tipo de Refactoring: El refactoring aplicado aquí sería Encapsulate Data, donde se agrupan los datos que comúnmente
+van juntos, y Move Method, donde los métodos que dependen de los datos de la persona se trasladan dentro de la clase Person.
+
+- Categoría del Refactoring: Este cambio es principalmente un Class Refactoring, ya que reestructura cómo se organizan y se 
+manejan los datos y comportamientos relacionados con las personas dentro del sistema.
+
+- Descripción: Se ha creado la clase Person para incluir los campos de peso, altura, edad, y género, que anteriormente 
+estaban dispersos. La clase ahora encapsula todos los datos relevantes, centralizando la lógica relacionada con las personas.
+
+- Registro de cambios manuales: Para este cambio, los cambios manuales incluyeron:
+    1. Creación de la interfaz Person.
+    2. Creación de la clase PersonaEspecifica, que implementa la interfaz Person.
+        - Implementación específica a los métodos de la interfaz Person.
+        - Implementación de control de parámetros de entrada de la clase HealthCalcImpl en el contructor de PersonaEspecifica. 
+    3. Cambio en la interfaz HealthCalc:
+    4. Cambio en la clase específica HealthCalcImpl:
+        - Se ha eliminado el control de parámetros de entrada erróneos en los métodos basalMetabolicRate e idealWeight.
+
+
+
