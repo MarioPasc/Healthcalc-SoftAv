@@ -24,7 +24,7 @@ centralizando la lógica de género en una única estructura de datos y permitie
 características orientadas a objetos para manejar diferencias basadas en el género de manera 
 más robusta.
 
-- Registro de cambios manuales: Para este cambio, los cambios manuales incluyeron:
+- Registro de cambios detallado:
     - Creación del enum Gender.
     - Cambio en la implementación específica HealthCalcImpl:
         1. char gender -> Gender gender
@@ -47,8 +47,6 @@ más robusta.
         2. pesoIdeal: 
             - char genero -> Gender genero
             - Se ha usado un switch (genero) para sumar las estadísticas del número de hombres y mujeres.
-
-(EXTRA) Cambios con herramientas automáticas:
     - Cambio en la interfaz HealthCalc: char gender -> Gender gender
     - Cambio en las pruebas unitarias: Se ha usado una herramienta de reemplazado de texto
     para cambiar las siguientes instancias:
@@ -64,6 +62,7 @@ más robusta.
         1. bmr: char genero -> Gender genero
         2. pesoIdeal: char genero -> Gender genero
 
+- Resumen de los cambios:
 +--------------------------------------+------------------------+-------------------------+
 | Clase afectada por refactorización   | Líneas de código       |     Refactorización     |
 |                                      | afectadas              |   (Manual/Automático)   |
@@ -100,7 +99,7 @@ manejan los datos y comportamientos relacionados con las personas dentro del sis
 - Descripción: Se ha creado la clase Person para incluir los campos de peso, altura, edad, y género, que anteriormente 
 estaban dispersos. La clase ahora encapsula todos los datos relevantes, centralizando la lógica relacionada con las personas.
 
-- Registro de cambios manuales: Para este cambio, los cambios manuales incluyeron:
+- Registro de cambios detallado:
     1. Creación de la interfaz Person.
     2. Creación de la clase PersonaEspecifica, que implementa la interfaz Person.
         - Implementación específica a los métodos de la interfaz Person.
@@ -126,6 +125,7 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
         ha transmitido a todas las clases que extienden MessageHandlerDecorator.
     10. Cambios en el Modelo Vista Controlador: Ahora peso ideal y BMR crean un objeto tipo Person para realizar los cálculos. 
 
+- Resumen de los cambios:
 +--------------------------------------+------------------------+-------------------------+
 | Clase afectada por refactorización   | Líneas de código       |     Refactorización     |
 |                                      | afectadas              |   (Manual/Automático)   |
@@ -134,7 +134,7 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
 | Clase PersonaEspecifica              | 77 líneas              | Manual                  |
 | Interfaz HealthCalc                  | 2 líneas               | Automático              |
 | Clase HealthCalcImpl                 | 12 líneas              | Manual                  |
-| Test unitarios                       | 90 líneas              | Manual                  |
+| Test unitarios                       | 74 líneas              | Manual                  |
 | Clase HealthHospital                 | 2 líneas               | Automático              |
 | Clase HealthCalcAdapter              | 10 líneas              | Manual                  |
 | Clase StatsProxy                     | 10 líneas              | Manual                  |
@@ -163,7 +163,7 @@ que definen contratos claros para los servicios relacionados con las métricas c
 - Descripción: Se han creado las interfaces CardiovascularMetrics y MetabolicMetrics para separar claramente las funcionalidades de 
 cálculo del peso ideal y la tasa metabólica basal, respectivamente. 
 
-- Registro de cambios manuales: Para este cambio, los cambios manuales incluyeron:
+- Registro de cambios detallados:
     1. Creación de la interfaz CardiovascularMetrics.
     2. Creación de la interface MetabolicMetrics.
     3. Modificación de la clase HealthCalcImpl para implementar las interfaces CardiovascularMetrics y MetabolicMetrics:
@@ -185,3 +185,18 @@ cálculo del peso ideal y la tasa metabólica basal, respectivamente.
         pantalla demasiados decimales para algunos cálculos. Al hacer que el formato sea más corto, se evita que se muestre 
         demasiados decimales.
     7. Eliminada la clase HealthCalc por "Remove Lazy Class". 
+
+- Resumen de los cambios:
++--------------------------------------+------------------------+-------------------------+
+| Clase afectada por refactorización   | Líneas de código       |     Refactorización     |
+|                                      | afectadas              |   (Manual/Automático)   |
++--------------------------------------+------------------------+-------------------------+
+| Interfaz CardiovascularMetrics       | 5 líneas               | Manual                  |
+| Interfaz MetabolicMetrics            | 5 líneas               | Manual                  |
+| Clase HealthCalcImpl                 | 7 líneas               | Manual/Automático       |
+| Test unitarios                       | 2 líneas               | Automático              |
+| Clase HealthCalcAdapter              | 3 líneas               | Manual/Automático       |
+| Modelo Vista-Controlador: Vista      | 2 líneas               | Manual                  |
+| Modelo Vista-Controlador: Controlador| 11 líneas              | Manual/Automático       |
+| HealthCalc                           | 36 líneas (eliminada)  | Automático              |
++--------------------------------------+------------------------+-------------------------+
