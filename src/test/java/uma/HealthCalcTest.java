@@ -111,14 +111,6 @@ public class HealthCalcTest {
 	}
 
 	@Test
-	@DisplayName("Test altura cero basalMetabolicRate")
-	public void testAlturaCeroBasalMetabolicRate() {
-		assertThrows(IllegalArgumentException.class, 
-		() -> new PersonaEspecifica(60, 0, 20, Gender.MALE), 
-		"La altura debe ser un valor positivo y razonable.");
-	}
-
-	@Test
 	@DisplayName("Test peso negativo basalMetabolicRate")
 	public void testPesoNegativoBasalMetabolicRate() {
 		assertThrows(IllegalArgumentException.class, 
@@ -132,6 +124,30 @@ public class HealthCalcTest {
 		assertThrows(IllegalArgumentException.class, 
 			() -> new PersonaEspecifica(60, 170, -1, Gender.MALE), 
 			"La edad debe ser un valor positivo y razonable.");
+	}
+
+    @Test
+	@DisplayName("Test altura cero basalMetabolicRate")
+	public void testAlturaCeroBasalMetabolicRate() {
+		assertThrows(IllegalArgumentException.class, 
+		() -> new PersonaEspecifica(60, 0, 20, Gender.MALE), 
+		"La altura debe ser un valor positivo y razonable.");
+	}
+
+    @Test
+	@DisplayName("Test peso cero basalMetabolicRate")
+	public void testPesoCeroBasalMetabolicRate() {
+		assertThrows(IllegalArgumentException.class, 
+		() -> new PersonaEspecifica(0, 100, 20, Gender.MALE), 
+		"La altura debe ser un valor positivo y razonable.");
+	}
+
+    @Test
+	@DisplayName("Test edad cero basalMetabolicRate")
+	public void testEdadCeroBasalMetabolicRate() {
+		assertThrows(IllegalArgumentException.class, 
+		() -> new PersonaEspecifica(60, 100, 0, Gender.MALE), 
+		"La altura debe ser un valor positivo y razonable.");
 	}
 
 	// Tests para valores de entrada que desbordan el tipo de datos

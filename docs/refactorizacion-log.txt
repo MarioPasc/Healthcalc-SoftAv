@@ -64,6 +64,24 @@ más robusta.
         1. bmr: char genero -> Gender genero
         2. pesoIdeal: char genero -> Gender genero
 
++--------------------------------------+------------------------+-------------------------+
+| Clase afectada por refactorización   | Líneas de código       |     Refactorización     |
+|                                      | afectadas              |   (Manual/Automático)   |
++--------------------------------------+------------------------+-------------------------+
+| Enum Gender                          | 5 líneas               | Manual                  |
+| HealthCalc                           | 2 líneas               | Automático              |
+| HealthCalcImpl                       | 31 líneas              | Manual                  |
+| Modelo Vista-Controlador             | 3 líneas               | Manual                  |
+| HealthStats, StatsProxy              | 16 líneas              | Manual                  |
+| Interfaz HealthCalc                  | 5 líneas               | Automático              |
+| Pruebas unitarias                    | 8 líneas               | Automático              |
+| MetricSystemDecorator,               | 2 líneas               | Automático              |
+| MessageHandlerDecorator              | 2 líneas               | Automático              |
+| Interfaz HealthHospital              | 5 líneas               | Automático              |
+| HealthHospital, HealthCalcAdapter    | 4 líneas               | Automático              |
++--------------------------------------+------------------------+-------------------------+
+
+
 
 ###################################################################################################################
 2. Sustitución de los atributos individuales 'height, weight, age y gender' por una clase que los contenga, Person
@@ -107,6 +125,28 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
         2. MessageHandlerDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. EL cambio se
         ha transmitido a todas las clases que extienden MessageHandlerDecorator.
     10. Cambios en el Modelo Vista Controlador: Ahora peso ideal y BMR crean un objeto tipo Person para realizar los cálculos. 
+
++--------------------------------------+------------------------+-------------------------+
+| Clase afectada por refactorización   | Líneas de código       |     Refactorización     |
+|                                      | afectadas              |   (Manual/Automático)   |
++--------------------------------------+------------------------+-------------------------+
+| Interfaz Person                      | 31 líneas              | Manual                  |
+| Clase PersonaEspecifica              | 77 líneas              | Manual                  |
+| Interfaz HealthCalc                  | 2 líneas               | Automático              |
+| Clase HealthCalcImpl                 | 12 líneas              | Manual                  |
+| Test unitarios                       | 90 líneas              | Manual                  |
+| Clase HealthHospital                 | 2 líneas               | Automático              |
+| Clase HealthCalcAdapter              | 10 líneas              | Manual                  |
+| Clase StatsProxy                     | 10 líneas              | Manual                  |
+| MetricSystemDecorator                | 4 líneas               | Automático              |
+| Clase AmericanDecorator              | 9 líneas               | Manual                  |
+| Clase EuropeanDecorator              | 6 líneas               | Manual                  |
+| MessageHandlerDecorator              | 8 líneas               | Automático              |
+| Clase EnglishMessageHandler          | 2 líneas               | Manual                  |
+| Clase SpanishMessageHanlder          | 2 líneas               | Manual                  |
+| Modelo Vista-Controlador             | 7 líneas               | Manual                  |
++--------------------------------------+------------------------+-------------------------+
+
 
 ######################################################################
 3. Creación de las interfaces CardiovascularMetrics y MetabolicMetrics
