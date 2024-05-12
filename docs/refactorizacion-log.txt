@@ -2,7 +2,9 @@
 Registro de la Refactorización al Código de la Aplicación
 =========================================================
 
+#######################################################
 1. Sustiución del tipo 'char' para Género por un 'ENUM'
+#######################################################
 
 - Bad Smell: El problema que resuelve este refactoring es principalmente Type Tests. 
 Este olor se manifiesta cuando hay operaciones que dependen de un tipo de datos específico, 
@@ -63,7 +65,9 @@ más robusta.
         2. pesoIdeal: char genero -> Gender genero
 
 
+###################################################################################################################
 2. Sustitución de los atributos individuales 'height, weight, age y gender' por una clase que los contenga, Person
+###################################################################################################################
 
 - Bad Smell: El problema que resuelve este refactoring es Data Clumbs. 
 Los mismos datos (como peso, altura, edad, género) se pasan juntos en varias funciones o clases, agruparlos en una 
@@ -103,8 +107,10 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
         2. MessageHandlerDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. EL cambio se
         ha transmitido a todas las clases que extienden MessageHandlerDecorator.
     10. Cambios en el Modelo Vista Controlador: Ahora peso ideal y BMR crean un objeto tipo Person para realizar los cálculos. 
-            
+
+######################################################################
 3. Creación de las interfaces CardiovascularMetrics y MetabolicMetrics
+######################################################################
 
 - Bad Smell: El principal problema aquí sería Large/God Class, donde una clase tiene demasiadas responsabilidades, abarcando múltiples 
 aspectos de la funcionalidad del sistema que deberían estar separados en módulos más cohesivos y especializados.
@@ -138,3 +144,4 @@ cálculo del peso ideal y la tasa metabólica basal, respectivamente.
         4. En la Vista, se ha añadio un "DecimalFormat". Esto es porque los tipos double, al tener más precisión, podrían mostrar por 
         pantalla demasiados decimales para algunos cálculos. Al hacer que el formato sea más corto, se evita que se muestre 
         demasiados decimales.
+    7. Eliminada la clase HealthCalc por "Remove Lazy Class". 
