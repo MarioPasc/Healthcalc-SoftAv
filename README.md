@@ -17,6 +17,7 @@
 - [Práctica 3: BDD](#práctica-3-bdd)
 - [Práctica 4: Interfaz Gráfica de Usuario](#práctica-4-interfaz-gráfica-de-usuario)
 - [Práctica 6: Patrones de Diseño](#practica-6-patrones-de-diseño)
+- [Práctica 7: Refactorización](#practica-7-refactorizacion)
 
 </details>
 
@@ -471,8 +472,203 @@ En el sistema del Hospital Costa del Sol, se han integrado dos tipos específico
 
 La aplicación de los patrones de diseño Singleton, Adaptador, Proxy y Decorador en el sistema de la calculadora de salud del Hospital Costa del Sol ilustra una integración eficiente que mejora la escalabilidad, flexibilidad y mantenimiento del software.
 
+</details>
 
 </details>
+
+# Práctica 7: Refactorización
+
+Durante el desarrollo y mantenimiento de la calculadora de salud, se realizaron diversas refactorizaciones importantes para mejorar la calidad y la mantenibilidad del código. Aquí se detallan las principales refactorizaciones implementadas:
+
+<details>
+<summary>1. Sustitución del tipo 'char' para Género por un 'ENUM'</summary>
+
+- **Problema Identificado:** Type Tests. Los caracteres que representan género ('m' o 'w') causaban verificaciones de tipo repetitivas y propensas a errores.
+
+- **Tipo de Refactoring:** Replace Type Code with Class.
+
+- **Categoría del Refactoring:** Attribute Refactoring.
+
+- **Descripción:** Se sustituyó el uso de caracteres para el género por una enumeración `Gender` con dos estados posibles: `FEMALE` y `MALE`. Esto centraliza la lógica de género en una estructura de datos única y mejora la robustez del manejo de diferencias basadas en el género.
+
+- **Cambios Detallados:**
+  - Creación del enum Gender.
+  - Cambio en la implementación específica HealthCalcImpl:
+      1. char gender -> Gender gender
+      2. Cambio del uso de "if" a usar "switch" ya que ahora tenemos un caso "default":
+          1. if (gender == 'm') -> case MALE:
+          2. else if (gender == 'w') -> case FEMALE:
+          3. default -> case DEFAULT: throw new IllegalArgumentException
+  - Cambio en el Controlador del Modelo Vista-Controlador: Se ha cambiado para que trabaje
+  con el enumerado uma.Gender:
+      1. Se ha importado uma.Gender
+      2. 'char' -> Gender 
+      3. 'm' -> Gender.MALE
+      4. 'w' -> Gender.FEMALE
+      5. Se ha creado un nuevo mensaje de error para el caso de que el usuario no seleccione un
+      género e intente calcular el BMR o peso ideal. 
+  - Cambio en la implementación específica de HealthStats, StatsProxy:
+      1. bmr: 
+          - char genero -> Gender genero
+          - Se ha usado un switch (genero) para sumar las estadísticas del número de hombres y mujeres.
+      2. pesoIdeal: 
+          - char genero -> Gender genero
+          - Se ha usado un switch (genero) para sumar las estadísticas del número de hombres y mujeres.
+  - Cambio en la interfaz HealthCalc: char gender -> Gender gender
+  - Cambio en las pruebas unitarias: Se ha usado una herramienta de reemplazado de texto
+  para cambiar las siguientes instancias:
+      1. 'm' -> Gender.MALE
+      2. 'w' -> Gender.FEMALE
+      3. 'x' -> null
+  - Cambio en los decoradores MetricSystemDecorator y MessageHandlerDecorador usando una herramienta de
+  reemplazado de texto automática: char genero -> Gender genero
+  - Cambio en la interfaz HealthHospital: Se ha cambiado el dato de entrada a Gender. 
+      1. bmr: char gender -> Gender gender
+      2. pesoIdeal: char gender -> Gender gender
+  - Cambio en la implementación específica de HealthHospital, HealthCalcAdapter:
+      1. bmr: char genero -> Gender genero
+      2. pesoIdeal: char genero -> Gender genero
+- **Resumen de los cambios**:
+
+| Clase afectada por refactorización   | Líneas de código afectadas | Refactorización (Manual/Automático) |
+|--------------------------------------|----------------------------|-------------------------------------|
+| Enum Gender                          | 5 líneas                   | Manual                              |
+| HealthCalc                           | 2 líneas                   | Automático                          |
+| HealthCalcImpl                       | 31 líneas                  | Manual                              |
+| Modelo Vista-Controlador             | 3 líneas                   | Manual                              |
+| HealthStats, StatsProxy              | 16 líneas                  | Manual                              |
+| Interfaz HealthCalc                  | 5 líneas                   | Automático                          |
+| Pruebas unitarias                    | 8 líneas                   | Automático                          |
+| MetricSystemDecorator,               | 2 líneas                   | Automático                          |
+| MessageHandlerDecorator              | 2 líneas                   | Automático                          |
+| Interfaz HealthHospital              | 5 líneas                   | Automático                          |
+| HealthHospital, HealthCalcAdapter    | 4 líneas                   | Automático                          |
+
+
+</details>
+
+<details>
+<summary>2. Sustitución de los atributos 'height, weight, age, gender' por una clase 'Person'</summary>
+
+- **Problema Identificado:** Data Clumps. La agrupación repetitiva de datos relacionados en múltiples lugares.
+
+- **Tipo de Refactoring:** Encapsulate Data y Move Method.
+
+- **Categoría del Refactoring:** Class Refactoring.
+
+- **Descripción:** Creación de la clase `Person` para encapsular los campos `height`, `weight`, `age`, y `gender`. Esto mejora la cohesión de los datos y centraliza la lógica relacionada.
+
+- **Cambios Detallados:**
+    - Creación de la interfaz Person.
+    - Creación de la clase PersonaEspecifica, que implementa la interfaz Person.
+        1. Implementación específica a los métodos de la interfaz Person.
+        2. Implementación de un constructor con los parámetros de entrada weight, height, age y gender para el BMR.
+        3. Implementación de un constructor con los parámetros de entrada height y gender para el peso ideal.
+    - Cambios en la interfaz HealthCalc: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+    - Cambios en la clase específica HealthCalcImpl:
+        1. Se ha eliminado el control de parámetros de entrada erróneos en los métodos basalMetabolicRate e idealWeight.
+        2. Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+    - Cambios en los test unitarios: Debido a que ahora la comporbación de parámetros se realiza en la clase PersonaEspecifica,
+    que implementa la interfaz Person, se han mantenido el mismo número de test, pero se ha esperado una excepción de Person. 
+    - Cambios en la clase HealthHospital: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+    - Cambios en la clase HealthCalcAdapter: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person, 
+    para estar acorde con la interfaz HealthHospital.
+    - Cambios en la clase StatsProxy: 
+        1. Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+        2. Se han cambiado en todos los métodos el acceso a los parámetros weight, height, age y gender 
+        por el acceso a los métodos getter de la clase Person.
+    - Cambios en los decoradores:
+        1. MetricSystemDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. El cambio se
+        ha transmitido a todas las clases que extienden MetricSystemDecorator.
+        2. MessageHandlerDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. EL cambio se
+        ha transmitido a todas las clases que extienden MessageHandlerDecorator.
+    - Cambios en el Modelo Vista Controlador: Ahora peso ideal y BMR crean un objeto tipo Person para realizar los cálculos. 
+
+- **Resumen de los cambios:**
+
+| Clase afectada por refactorización   | Líneas de código afectadas | Refactorización (Manual/Automático) |
+|--------------------------------------|----------------------------|-------------------------------------|
+| Interfaz Person                      | 31 líneas                  | Manual                              |
+| Clase PersonaEspecifica              | 77 líneas                  | Manual                              |
+| Interfaz HealthCalc                  | 2 líneas                   | Automático                          |
+| Clase HealthCalcImpl                 | 12 líneas                  | Manual                              |
+| Test unitarios                       | 74 líneas                  | Manual                              |
+| Clase HealthHospital                 | 2 líneas                   | Automático                          |
+| Clase HealthCalcAdapter              | 10 líneas                  | Manual                              |
+| Clase StatsProxy                     | 10 líneas                  | Manual                              |
+| MetricSystemDecorator                | 4 líneas                   | Automático                          |
+| Clase AmericanDecorator              | 9 líneas                   | Manual                              |
+| Clase EuropeanDecorator              | 6 líneas                   | Manual                              |
+| MessageHandlerDecorator              | 8 líneas                   | Automático                          |
+| Clase EnglishMessageHandler          | 2 líneas                   | Manual                              |
+| Clase SpanishMessageHandler          | 2 líneas                   | Manual                              |
+| Modelo Vista-Controlador             | 7 líneas                   | Manual                              |
+
+
+</details>
+
+<details>
+<summary>3. Creación de las interfaces CardiovascularMetrics y MetabolicMetrics</summary>
+
+- **Problema Identificado:** Large/God Class. Excesivas responsabilidades acumuladas en clases individuales.
+
+- **Tipo de Refactoring:** Extract Interface.
+
+- **Categoría del Refactoring:** Class Refactoring.
+
+- **Descripción:** Se crearon las interfaces `CardiovascularMetrics` y `MetabolicMetrics` para separar las funcionalidades relacionadas con el cálculo del peso ideal y la tasa metabólica basal, respectivamente.
+
+- **Cambios Detallados:**
+
+    - Creación de la interfaz Person.
+    - Creación de la clase PersonaEspecifica, que implementa la interfaz Person.
+        1. Implementación específica a los métodos de la interfaz Person.
+        2. Implementación de un constructor con los parámetros de entrada weight, height, age y gender para el BMR.
+        3. Implementación de un constructor con los parámetros de entrada height y gender para el peso ideal.
+    - Cambios en la interfaz HealthCalc: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+    - Cambios en la clase específica HealthCalcImpl:
+        1. Se ha eliminado el control de parámetros de entrada erróneos en los métodos basalMetabolicRate e idealWeight.
+        2. Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+    - Cambios en los test unitarios: Debido a que ahora la comporbación de parámetros se realiza en la clase PersonaEspecifica,
+    que implementa la interfaz Person, se han mantenido el mismo número de test, pero se ha esperado una excepción de Person. 
+    - Cambios en la clase HealthHospital: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+    - Cambios en la clase HealthCalcAdapter: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person, 
+    para estar acorde con la interfaz HealthHospital.
+    - Cambios en la clase StatsProxy: 
+        1. Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
+        2. Se han cambiado en todos los métodos el acceso a los parámetros weight, height, age y gender 
+        por el acceso a los métodos getter de la clase Person.
+    - Cambios en los decoradores:
+        1. MetricSystemDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. El cambio se
+        ha transmitido a todas las clases que extienden MetricSystemDecorator.
+        2. MessageHandlerDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. EL cambio se
+        ha transmitido a todas las clases que extienden MessageHandlerDecorator.
+    - Cambios en el Modelo Vista Controlador: Ahora peso ideal y BMR crean un objeto tipo Person para realizar los cálculos. 
+
+- **Resumen de los cambios:**
+
+| Clase afectada por refactorización   | Líneas de código afectadas | Refactorización (Manual/Automático) |
+|--------------------------------------|----------------------------|-------------------------------------|
+| Interfaz CardiovascularMetrics       | 5 líneas                   | Manual                              |
+| Interfaz MetabolicMetrics            | 5 líneas                   | Manual                              |
+| Clase HealthCalcImpl                 | 7 líneas                   | Manual/Automático                   |
+| Test unitarios                       | 2 líneas                   | Automático                          |
+| Clase HealthCalcAdapter              | 3 líneas                   | Manual/Automático                   |
+| Modelo Vista-Controlador: Vista      | 2 líneas                   | Manual                              |
+| Modelo Vista-Controlador: Controlador| 11 líneas                  | Manual/Automático                   |
+| HealthCalc                           | 36 líneas (eliminada)      | Automático                          |
+
+
+</details>
+
+Se incluye entonces una tabla a modo de resumen de todos los cambios aplicados usando la refactorización. Estos cambios se han relado con la finalidad de desarrollar un software más
+limpio y sostenible
+
+| Refactoring                                      | Bad Smell        | Tipo de Refactoring            | Categoría             | Total Líneas de Código Afectadas |
+|--------------------------------------------------|------------------|--------------------------------|-----------------------|----------------------------------|
+| Sustitución del tipo 'char' por 'ENUM' (Género)  | Type Tests       | Replace Type Code with Class   | Attribute Refactoring | 83 líneas                        |
+| Agrupación de atributos en clase 'Person'        | Data Clumps      | Encapsulate Data y Move Method | Class Refactoring     | 231 líneas                       |
+| Creación de interfaces Cardiovascular y Metabolic| Large/God Class  | Extract Interface              | Class Refactoring     | 43 líneas                        |
 
 
 ## Cómo Usar
