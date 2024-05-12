@@ -14,8 +14,8 @@ public class HealthCalcAdapter implements HealthHospital {
         float pesoEnKg = persona.weight() / 1000.0f; // Convertir gramos a kilogramos
         Person personaEspecifica = new PersonaEspecifica(pesoEnKg, (int) alturaEnCm, persona.age(), persona.gender());
         try {
-            float bmr = healthCalcCore.basalMetabolicRate(personaEspecifica);
-            return (double) bmr;
+            double bmr = healthCalcCore.basalMetabolicRate(personaEspecifica);
+            return bmr;
         } catch (Exception e) {
             e.printStackTrace();
             return 0.0;
@@ -27,7 +27,7 @@ public class HealthCalcAdapter implements HealthHospital {
         float alturaEnCm = persona.height() * 100; // Convertir metros a centímetros
         Person personaEspecifica = new PersonaEspecifica((int) alturaEnCm, persona.gender());
         try {
-            return (int)(1000*healthCalcCore.idealWeight(personaEspecifica));
+            return (int)(1000*healthCalcCore.getIdealBodyWeight(personaEspecifica));
         } catch (Exception e) {
             e.printStackTrace();
             return 0;

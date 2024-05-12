@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.JButton;
 import javax.swing.JSpinner;
@@ -29,7 +30,8 @@ public class HealthCalcVista {
 	private JSpinner AgeValue;
 	private JButton CalcBMR;
 	private JButton CalcIdealWeight;
-	
+	private DecimalFormat decimalFormat = new DecimalFormat("#.###");
+
 	/**
 	 * Launch the application.
 	 */
@@ -232,13 +234,14 @@ public class HealthCalcVista {
 		FemaleButton.setActionCommand("femaleButton");
 	}
 	
-	public void setBMRResults(float res) {
-		BMRResults.setText(String.valueOf(res));
-	}
-	
-	public void setIdealWResults(float res) {
-		IdealWeightResults.setText(String.valueOf(res));
-	}
+	public void setBMRResults(double res) {
+        BMRResults.setText(decimalFormat.format(res));
+    }
+
+    public void setIdealWResults(double res) {
+        IdealWeightResults.setText(decimalFormat.format(res));
+    }
+
 	
 	public void invalidInputsIdealWError(String errCode) {
 		JOptionPane.showMessageDialog(frame,

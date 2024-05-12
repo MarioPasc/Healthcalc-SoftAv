@@ -49,7 +49,7 @@ public class Controlador implements ActionListener{
 					
 					try {
 						Person persona = new PersonaEspecifica(weight, height, age, gender);
-						float bmr = this.calculadora.basalMetabolicRate(persona);
+						double bmr = this.calculadora.basalMetabolicRate(persona);
 			            vista.setBMRResults(bmr);
 					} catch (NullPointerException e1) {
 						vista.noInputGender();
@@ -66,7 +66,7 @@ public class Controlador implements ActionListener{
 					
 					try {
 						Person persona = new PersonaEspecifica(height, gender);
-						float idealWeight = this.calculadora.idealWeight(persona);
+						double idealWeight = this.calculadora.getIdealBodyWeight(persona);
 			            vista.setIdealWResults(idealWeight);
 					} catch (NullPointerException e1) {
 						vista.noInputGender();
