@@ -85,7 +85,7 @@ public class HealthCalcTest {
     public void testPesoIdealHombre() throws Exception {
         PersonaEspecifica persona = new PersonaEspecifica(70, 180, 25, Gender.MALE);
         float pesoIdealEsperado = 180 - 100 - (180 - 150) / 4f;
-        assertEquals(pesoIdealEsperado, healthCalc.idealWeight(persona), 
+        assertEquals(pesoIdealEsperado, healthCalc.getIdealBodyWeight(persona), 
         "El cálculo del peso ideal para hombre no es correcto.");
     }
 
@@ -94,7 +94,7 @@ public class HealthCalcTest {
     public void testPesoIdealMujer() throws Exception {
         PersonaEspecifica persona = new PersonaEspecifica(60, 180, 25, Gender.FEMALE);
         float pesoIdealEsperado = 180 - 100 - (180 - 150) / 2.5f;
-        assertEquals(pesoIdealEsperado, healthCalc.idealWeight(persona), 
+        assertEquals(pesoIdealEsperado, healthCalc.getIdealBodyWeight(persona), 
         "El cálculo del peso ideal para mujer no es correcto.");
     }
 

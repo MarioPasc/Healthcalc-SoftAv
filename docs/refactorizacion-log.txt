@@ -120,3 +120,10 @@ cálculo del peso ideal y la tasa metabólica basal, respectivamente.
 - Registro de cambios manuales: Para este cambio, los cambios manuales incluyeron:
     1. Creación de la interfaz CardiovascularMetrics.
     2. Creación de la interface MetabolicMetrics.
+    3. Modificación de la clase HealthCalcImpl para implementar las interfaces CardiovascularMetrics y MetabolicMetrics:
+        1. Se ha cambiado el tipo de dato a devolver y el nombre del método idealWeight, así como el tipo de variable en el que se almacena
+        el peso ideal.
+        2. Se ha cambiado el tipo de dato a devolver y el nombre del método basalMetabolicRate, así como el tipo de variable en el que 
+        se almacena la tasa metabólica basal.
+    4. Modificación  de los test unitarios: Se han cambiado los test unitarios para que los métodos que hacían uso de 'idealWeight' ahora 
+    hagan uso de 'getIdealBodyWeight'.

@@ -1,6 +1,6 @@
 package uma;
 
-public class HealthCalcImpl implements HealthCalc {
+public class HealthCalcImpl implements CardiovascularMetrics, MetabolicMetrics {
     // Patrón Singleton Aplicado
     private static HealthCalcImpl instance;
 
@@ -14,21 +14,21 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public float idealWeight(Person persona) throws Exception {        
+    public double getIdealBodyWeight(Person persona) {        
         // Obtenemos los datos de la persona:
         float height = persona.height();
         Gender gender = persona.gender();
         // Calculamos el peso ideal:
         switch (gender) {
             case MALE:
-                float pesoIdealM = height - 100 - (height - 150) / 4f;
+                double pesoIdealM = height - 100 - (height - 150) / 4f;
                 if (pesoIdealM > 0) {
                     return pesoIdealM;
                 } else {
                     throw new IllegalArgumentException("El peso ideal es cero o menor que cero.");
                 }
             default:
-                float pesoIdealF = height - 100 - (height - 150) / 2.5f;
+                double pesoIdealF = height - 100 - (height - 150) / 2.5f;
                 if (pesoIdealF > 0) {
                     return pesoIdealF;
                 } else {
@@ -38,7 +38,7 @@ public class HealthCalcImpl implements HealthCalc {
     }
 
     @Override
-    public float basalMetabolicRate(Person person) throws Exception {  
+    public double basalMetabolicRate(Person person) {
         // Obtenemos los datos de la persona:
         float weight = person.weight();
         float height = person.height();
@@ -47,14 +47,14 @@ public class HealthCalcImpl implements HealthCalc {
         // Calculamos la tasa metabólica basal:
         switch (gender) {
             case MALE:
-                float resultadoBMRHombre = 10 * weight + 6.25f * height - 5 * age + 5;
+                double resultadoBMRHombre = 10 * weight + 6.25f * height - 5 * age + 5;
                 if (resultadoBMRHombre > 0) {
                     return resultadoBMRHombre;
                 } else {
                     throw new IllegalArgumentException("El metabolismo basal es cero o menor que cero.");
                 }
             default: // La otra única opción es que sea Gender.FEMALE
-                float resultadoBMRMujer = 10 * weight + 6.25f * height - 5 * age - 161;
+                double resultadoBMRMujer = 10 * weight + 6.25f * height - 5 * age - 161;
                 if (resultadoBMRMujer > 0) {
                     return resultadoBMRMujer;
                 } else {

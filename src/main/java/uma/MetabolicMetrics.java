@@ -1,5 +1,5 @@
 package uma;
 
 public interface MetabolicMetrics {
-    public double basalMetabolicRate();
+    public double basalMetabolicRate(Person person);
 }
