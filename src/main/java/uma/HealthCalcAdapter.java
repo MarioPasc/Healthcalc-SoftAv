@@ -9,10 +9,20 @@ public class HealthCalcAdapter implements HealthHospital {
     }
 
     @Override
-    public double bmr(Person persona) {
-        float alturaEnCm = persona.height() * 100; // Convertir metros a centímetros
-        float pesoEnKg = persona.weight() / 1000.0f; // Convertir gramos a kilogramos
-        Person personaEspecifica = new PersonaEspecifica(pesoEnKg, (int) alturaEnCm, persona.age(), persona.gender());
+    public double bmr(char genero, int edad, float altura, int peso) {
+        float alturaEnCm = altura * 100; // Convertir metros a centímetros
+        float pesoEnKg = peso / 1000.0f; // Convertir gramos a kilogramos
+        
+        Gender gender;
+        if (genero == 'w' || genero == 'W') {
+            gender = Gender.FEMALE;
+        } else if (genero == 'm' || genero == 'M') {
+            gender = Gender.MALE;
+        } else {
+            gender = null; // La clase PersonaEspecifica maneja la excepción
+        }
+        
+        Person personaEspecifica = new PersonaEspecifica(pesoEnKg, (int) alturaEnCm, edad, gender);
         try {
             double bmr = healthCalcCore.basalMetabolicRate(personaEspecifica);
             return bmr;
@@ -23,9 +33,17 @@ public class HealthCalcAdapter implements HealthHospital {
     }
 
     @Override
-    public int pesoIdeal(Person persona) {
-        float alturaEnCm = persona.height() * 100; // Convertir metros a centímetros
-        Person personaEspecifica = new PersonaEspecifica((int) alturaEnCm, persona.gender());
+    public int pesoIdeal(char genero, float altura) {
+        float alturaEnCm = altura * 100; // Convertir metros a centímetros
+        Gender gender;
+        if (genero == 'w' || genero == 'W') {
+            gender = Gender.FEMALE;
+        } else if (genero == 'm' || genero == 'M') {
+            gender = Gender.MALE;
+        } else {
+            gender = null; // La clase PersonaEspecifica maneja la excepción
+        }
+        Person personaEspecifica = new PersonaEspecifica((int) alturaEnCm, gender);
         try {
             return (int)(1000*healthCalcCore.getIdealBodyWeight(personaEspecifica));
         } catch (Exception e) {

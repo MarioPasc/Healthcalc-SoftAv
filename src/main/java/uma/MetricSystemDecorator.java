@@ -18,11 +18,11 @@ public class MetricSystemDecorator implements HealthHospital{
     }
 
     @Override
-    public int pesoIdeal(Person persona){
-        return healthCalcStatsProxy.pesoIdeal(persona);
+    public int pesoIdeal(char genero, float altura){
+        return healthCalcStatsProxy.pesoIdeal(genero, altura);
     }
     @Override
-    public double bmr(Person persona){
-        return healthCalcStatsProxy.bmr(persona);
+    public double bmr(char genero, int edad, float altura, int peso){
+        return healthCalcStatsProxy.bmr(genero, edad, altura, peso);
     }
 }

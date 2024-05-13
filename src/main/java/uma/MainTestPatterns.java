@@ -2,10 +2,6 @@ package uma;
 
 public class MainTestPatterns {
     public static void main(String[] args) throws Exception{
-        Person personaBMREuropea = new PersonaEspecifica(108, (float)(1.7), 20, Gender.MALE);
-        Person personaBMRAmericana = new PersonaEspecifica(48988, (float)(5.57743), 20, Gender.MALE);
-        Person personaIdealWeightEuropea = new PersonaEspecifica((float)1.7, Gender.MALE);
-        Person personaIdealWeightAmericana = new PersonaEspecifica((float)(5.57743), Gender.MALE);
         // Creamos una instancia de la calculadora
         HealthCalcImpl.getInstance();
         HealthCalcAdapter adapterHospital = new HealthCalcAdapter();
@@ -21,18 +17,25 @@ public class MainTestPatterns {
         EnglishMessageHandler messageCalcEN = new EnglishMessageHandler(americanMetricSystemCalc);
         // Realizas cálculos
         System.out.println("## Calculadora Americana ##");
-        messageCalcEN.bmr(personaBMRAmericana);
-        messageCalcES.bmr(personaBMRAmericana);
+        char genero = 'm';
+        float altura_americana = (float)(5.57743);
+        float altura_europea = (float)(1.7);
+        int peso_americano = 48988;
+        int peso_europeo = 108;
+        int edad = 20;
+
+        messageCalcEN.bmr(genero, edad, altura_americana, peso_americano);
+        messageCalcES.bmr(genero, edad, altura_americana, peso_americano);
         System.out.println("## Calculadora Europea ##");
         // Cambias los parámetros de los decoradores para cambiar de calculadora
         messageCalcES.setCalculator(europeMetricSystemCalc);
         messageCalcEN.setCalculator(europeMetricSystemCalc);
-        messageCalcEN.bmr(personaBMREuropea);
-        messageCalcES.bmr(personaBMREuropea);
+        messageCalcEN.bmr(genero, edad, altura_europea, peso_europeo);
+        messageCalcES.bmr(genero, edad, altura_europea, peso_europeo);
         System.out.println("=======================================");
         System.out.println("Comprobación peso ideal");
-        System.out.println("Comprobación con calculadora Europea: " + europeMetricSystemCalc.pesoIdeal(personaIdealWeightEuropea) + " gramos");
-        System.out.println("Comprobación con calculadora Americana: " + americanMetricSystemCalc.pesoIdeal(personaIdealWeightAmericana) + " gramos");
+        System.out.println("Comprobación con calculadora Europea: " + europeMetricSystemCalc.pesoIdeal(genero, altura_europea) + " gramos");
+        System.out.println("Comprobación con calculadora Americana: " + americanMetricSystemCalc.pesoIdeal(genero, altura_americana) + " gramos");
         // Imprimimos las estadísticas
         System.out.println("========== Healthcalc Stats ==========");
         System.out.println("Avg BMR:              " + healthCalcStats.bmrMedio() + " kcal/dia");

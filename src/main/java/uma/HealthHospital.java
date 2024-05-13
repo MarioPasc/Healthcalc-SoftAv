@@ -15,7 +15,7 @@ public interface HealthHospital {
      * @param peso      Peso de la persona (GRAMOS).
      * @return          La Tasa Metabólica Basal de la persona.
      */
-    public double bmr(Person persona);
+    public double bmr(char genero, int edad, float altura, int peso);
     /**
      * Calcula el peso ideal (PI) de una persona siguiendo la fórmula de Lorentz:
      *
@@ -23,5 +23,5 @@ public interface HealthHospital {
      * @param altura    Altura de la persona (METROS).
      * @return          El peso ideal de la persona (GRAMOS).
      */
-    public int pesoIdeal(Person persona);
+    public int pesoIdeal(char genero, float altura);
 }

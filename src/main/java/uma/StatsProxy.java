@@ -24,35 +24,33 @@ public class StatsProxy implements HealthHospital, HealthStats {
     }
 
     @Override
-    public int pesoIdeal(Person persona) {
-        float idealWeight = healthCalc.pesoIdeal(persona);
-        alturas.add((float) persona.height());
-        switch (persona.gender()) {
-            case MALE:
-                numHombres ++;
-                break;
-            case FEMALE:
-                numMujeres++;
-                break;
+    public int pesoIdeal(char genero, float altura) {
+        int pesoIdeal = healthCalc.pesoIdeal(genero, altura);
+        alturas.add(altura);
+        
+        if (genero == 'w' || genero == 'W') {
+            numMujeres++;
+        } else if (genero == 'm' || genero == 'M') {
+            numHombres++;
         }
-        return (int)idealWeight;
+        
+        return pesoIdeal;
     }
 
     @Override
-    public double bmr(Person persona) {
-        double bmr = healthCalc.bmr(persona);
-        pesos.add((float) persona.weight());
-        alturas.add(persona.height());
-        edades.add(persona.age());
+    public double bmr(char genero, int edad, float altura, int peso) {
+        double bmr = healthCalc.bmr(genero, edad, altura, peso);
+        pesos.add((float) peso / 1000.0f); // Convertir gramos a kilogramos
+        alturas.add(altura);
+        edades.add(edad);
         bmrs.add((float) bmr);
-        switch (persona.gender()) {
-            case MALE:
-                numHombres ++;
-                break;
-            case FEMALE:
-                numMujeres++;
-                break;
+        
+        if (genero == 'w' || genero == 'W') {
+            numMujeres++;
+        } else if (genero == 'm' || genero == 'M') {
+            numHombres++;
         }
+        
         return bmr;
     }
 

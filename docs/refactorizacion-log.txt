@@ -40,27 +40,12 @@ más robusta.
         4. 'w' -> Gender.FEMALE
         5. Se ha creado un nuevo mensaje de error para el caso de que el usuario no seleccione un
         género e intente calcular el BMR o peso ideal. 
-    - Cambio en la implementación específica de HealthStats, StatsProxy:
-        1. bmr: 
-            - char genero -> Gender genero
-            - Se ha usado un switch (genero) para sumar las estadísticas del número de hombres y mujeres.
-        2. pesoIdeal: 
-            - char genero -> Gender genero
-            - Se ha usado un switch (genero) para sumar las estadísticas del número de hombres y mujeres.
     - Cambio en la interfaz HealthCalc: char gender -> Gender gender
     - Cambio en las pruebas unitarias: Se ha usado una herramienta de reemplazado de texto
     para cambiar las siguientes instancias:
         1. 'm' -> Gender.MALE
         2. 'w' -> Gender.FEMALE
         3. 'x' -> null
-    - Cambio en los decoradores MetricSystemDecorator y MessageHandlerDecorador usando una herramienta de
-    reemplazado de texto automática: char genero -> Gender genero
-    - Cambio en la interfaz HealthHospital: Se ha cambiado el dato de entrada a Gender. 
-        1. bmr: char gender -> Gender gender
-        2. pesoIdeal: char gender -> Gender gender
-    - Cambio en la implementación específica de HealthHospital, HealthCalcAdapter:
-        1. bmr: char genero -> Gender genero
-        2. pesoIdeal: char genero -> Gender genero
 
 - Resumen de los cambios:
 +--------------------------------------+------------------------+-------------------------+
@@ -71,13 +56,7 @@ más robusta.
 | HealthCalc                           | 2 líneas               | Automático              |
 | HealthCalcImpl                       | 31 líneas              | Manual                  |
 | Modelo Vista-Controlador             | 3 líneas               | Manual                  |
-| HealthStats, StatsProxy              | 16 líneas              | Manual                  |
-| Interfaz HealthCalc                  | 5 líneas               | Automático              |
 | Pruebas unitarias                    | 8 líneas               | Automático              |
-| MetricSystemDecorator,               | 2 líneas               | Automático              |
-| MessageHandlerDecorator              | 2 líneas               | Automático              |
-| Interfaz HealthHospital              | 5 líneas               | Automático              |
-| HealthHospital, HealthCalcAdapter    | 4 líneas               | Automático              |
 +--------------------------------------+------------------------+-------------------------+
 
 
@@ -111,18 +90,6 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
         - Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
     5. Cambios en los test unitarios: Debido a que ahora la comporbación de parámetros se realiza en la clase PersonaEspecifica,
     que implementa la interfaz Person, se han mantenido el mismo número de test, pero se ha esperado una excepción de Person. 
-    6. Cambios en la clase HealthHospital: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
-    7. Cambios en la clase HealthCalcAdapter: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person, 
-    para estar acorde con la interfaz HealthHospital.
-    8. Cambios en la clase StatsProxy: 
-        - Se han cambiado los parámetros de entrada weight, height, age y gender por Person person.
-        - Se han cambiado en todos los métodos el acceso a los parámetros weight, height, age y gender 
-        por el acceso a los métodos getter de la clase Person.
-    9. Cambios en los decoradores:
-        1. MetricSystemDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. El cambio se
-        ha transmitido a todas las clases que extienden MetricSystemDecorator.
-        2. MessageHandlerDecorator: Se han cambiado los parámetros de entrada weight, height, age y gender por Person person. EL cambio se
-        ha transmitido a todas las clases que extienden MessageHandlerDecorator.
     10. Cambios en el Modelo Vista Controlador: Ahora peso ideal y BMR crean un objeto tipo Person para realizar los cálculos. 
 
 - Resumen de los cambios:
@@ -135,15 +102,6 @@ estaban dispersos. La clase ahora encapsula todos los datos relevantes, centrali
 | Interfaz HealthCalc                  | 2 líneas               | Automático              |
 | Clase HealthCalcImpl                 | 12 líneas              | Manual                  |
 | Test unitarios                       | 74 líneas              | Manual                  |
-| Clase HealthHospital                 | 2 líneas               | Automático              |
-| Clase HealthCalcAdapter              | 10 líneas              | Manual                  |
-| Clase StatsProxy                     | 10 líneas              | Manual                  |
-| MetricSystemDecorator                | 4 líneas               | Automático              |
-| Clase AmericanDecorator              | 9 líneas               | Manual                  |
-| Clase EuropeanDecorator              | 6 líneas               | Manual                  |
-| MessageHandlerDecorator              | 8 líneas               | Automático              |
-| Clase EnglishMessageHandler          | 2 líneas               | Manual                  |
-| Clase SpanishMessageHanlder          | 2 líneas               | Manual                  |
 | Modelo Vista-Controlador             | 7 líneas               | Manual                  |
 +--------------------------------------+------------------------+-------------------------+
 
@@ -173,9 +131,6 @@ cálculo del peso ideal y la tasa metabólica basal, respectivamente.
         se almacena la tasa metabólica basal.
     4. Modificación  de los test unitarios: Se han cambiado los test unitarios para que los métodos que hacían uso de 'idealWeight' ahora 
     hagan uso de 'getIdealBodyWeight'.
-    5. Modificación en HealthCalcAdapter: 
-        1. Se ha cambiado el tipo de dato que almacenaba el bmr antes de devolverlo en el método 'bmr' float->double.
-        2. Se ha cambiado el nombre del método 'idealWeight' por 'getIdealBodyWeight'.
     6. Modificación en el Modelo Vista-Controlador:
         1. En el Controlador, se ha cambiado el tipo de dato para almacenar el BMR. 
         2. En el controlador, se ha cambiado el tipo de dato para almacenar el peso ideal en el Controlador y el 
@@ -195,7 +150,6 @@ cálculo del peso ideal y la tasa metabólica basal, respectivamente.
 | Interfaz MetabolicMetrics            | 5 líneas               | Manual                  |
 | Clase HealthCalcImpl                 | 7 líneas               | Manual/Automático       |
 | Test unitarios                       | 2 líneas               | Automático              |
-| Clase HealthCalcAdapter              | 3 líneas               | Manual/Automático       |
 | Modelo Vista-Controlador: Vista      | 2 líneas               | Manual                  |
 | Modelo Vista-Controlador: Controlador| 11 líneas              | Manual/Automático       |
 | HealthCalc                           | 36 líneas (eliminada)  | Automático              |

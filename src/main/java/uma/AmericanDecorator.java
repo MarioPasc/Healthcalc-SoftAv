@@ -11,18 +11,16 @@ public class AmericanDecorator extends MetricSystemDecorator{
     }
 
     @Override
-    public int pesoIdeal(Person persona){
+    public int pesoIdeal(char genero, float altura){
         // La altura viene en pies, la convertimos a metros, que es con lo que trabaja HealthHospital
-        Person personaAmericano = new PersonaEspecifica((float)(persona.height()*0.3048), persona.gender());
-        return super.pesoIdeal(personaAmericano);
+        return super.pesoIdeal(genero, (float)(altura*0.3048));
         }
 
     @Override
-    public double bmr(Person persona){
+    public double bmr(char genero, int edad, float altura, int peso){
         // EL peso viene en libras, se convierte a gramos, que es en lo que trabaja HealthHospital
         // La altura viene en pies, la convertimos a metros, que es con lo que trabaja HealthHospital
-        Person personaAmericano = new PersonaEspecifica((float)(persona.weight() * 453.592), (float)(persona.height()*0.3048), persona.age(), persona.gender());
-        return super.bmr(personaAmericano);
+        return super.bmr(genero, edad, (float)(altura*0.3048), (int)(peso* 453.592));
     }
 
     public List<String> getUnits() {

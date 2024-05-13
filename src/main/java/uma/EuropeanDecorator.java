@@ -13,16 +13,14 @@ public class EuropeanDecorator extends MetricSystemDecorator {
     }
 
     @Override
-    public int pesoIdeal(Person persona){
+    public int pesoIdeal(char genero, float altura){
         // Debido a que la interfaz HealthHospital ya trabaja en gramos y metros, no hay que hacer ningun cambio
-        Person personaEuropeo = new PersonaEspecifica(persona.height(), persona.gender());
-        return super.pesoIdeal(personaEuropeo);
+        return super.pesoIdeal(genero, altura);
     }
 
     @Override
-    public double bmr(Person persona){
-        Person personaEuropeo = new PersonaEspecifica(persona.weight(), persona.height(), persona.age(), persona.gender());
-        return super.bmr(personaEuropeo);
+    public double bmr(char genero, int edad, float altura, int peso){
+        return super.bmr(genero, edad, altura, peso);
     }
 
     public List<String> getUnits() {
